@@ -3,23 +3,11 @@ import { BrowserRouter, Router, Link, Route, Switch, useHistory, Redirect, HashR
 import AttemptAuth from '../auth/AttemptAuth';
 // import _Login from '../auth/_Login';
 import _MainLayouts from '../layouts/_MainLayouts';
-import Dashboard from '../pages/Dashboard';
-import DataDosen from '../pages/Dosen/DataDosen';
-
-import Forms from '../pages/Forms'
-import Home from '../pages/Home';
-import DataMatakuliah from '../pages/MataKuliah/DataMatakuliah';
-import InputMatakuliah from '../pages/MataKuliah/InputMatakuliah';
-// import MataKuliah from '../pages/MataKuliah/MataKuliah';
-import ProsesTopik from '../pages/MataKuliah/Topic/ProsesTopik';
-import Topic from '../pages/MataKuliah/Topic/Topic';
+ 
 import ArsipBerkas from '../pages/Pemgadaan/ArsipBerkas';
 import DataArsip from '../pages/Pemgadaan/DataArsip';
 import PreviewPDF from '../pages/Pemgadaan/PreviewPDF';
 import { Cache } from '../services/Cache';
-import { ubahText } from '../services/Crypto';
-// import InputPengaduanPasien from '../../MPP/InputPengaduanPasien'
-import ProtectedRoute from '../services/Route/ProtectedRoute'
 import { globalText } from '../services/Text/GlobalText';
 
 
