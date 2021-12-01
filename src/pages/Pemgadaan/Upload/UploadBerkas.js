@@ -3,7 +3,7 @@ import { Upload, Progress, Space, List, Image, Button, Form, Pagination } from "
 import { CloudDownloadOutlined, DiffOutlined, FundViewOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import _MainLayouts from '../../../layouts/_MainLayouts';
-import _Api, { baseURL, baseURL_229 } from '../../../services/Api/_Api';
+import _Api, { baseURL } from '../../../services/Api/_Api';
 import { _Button, _Date, _Input, _Label, _TitleBar } from '../../../services/Forms/Forms';
 // import { _Row } from '../../services/Forms/LayoutBootstrap';
 
@@ -63,7 +63,7 @@ function UploadBerkas(pr) {
 
 
             await axios.post(
-                `${baseURL_229}testUpload`, F,config
+                `${baseURL}testUpload`, F,config
             ).then(res => { });
 
             // console.log(`options`, options)

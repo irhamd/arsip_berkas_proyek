@@ -122,8 +122,7 @@ function DataArsip() {
 
     const simpanArsip = () => {
         _Api.post("simpanDataBerkas", isiForm).then(res => {
-            console.log(`res.data`, res.data)
-
+            // console.log(`res.data`, res.data)
             _Toastr.success("Suksess .!")
 
         })
@@ -178,7 +177,7 @@ function DataArsip() {
             <Tabs activeKey={`${steps + 1}`} tabBarStyle={{ height: "1px" }} tabPosition="bottom">
                 <TabPane key="1">
                     <_Select size="large" option={jenisTender}
-                        val="val"
+                        val="val" 
                         onSelect={e => change("jenis", e)}
                         caption="caption" label="Jenis" />
                 </TabPane>
@@ -191,9 +190,9 @@ function DataArsip() {
                 <TabPane key="3">
                     <Form labelCol={{ span: "8" }} wrapperCol={{ span: "10" }}>
                         {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
-                        <_Input label="Nama Pekerjaan" onChange={e => change("namapekerjaan", e.target.value)} />
-                        <_Input label="Tahun Anggaran (TA)" onChange={e => change("tahunanggaran", e.target.value)} />
-                        <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" />
+                        <_Input label="Nama Pekerjaan" onChange={e => change("namapekerjaan", e.target.value)} required />
+                        <_Input label="Tahun Anggaran (TA)" onChange={e => change("tahunanggaran", e.target.value)} required />
+                        <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" required />
                     </Form>
                     {/* register pengadaan */}
                     <Table size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }} columns={columns} dataSource={registerpengadaan} onChange={onChangeTable} />
@@ -203,7 +202,7 @@ function DataArsip() {
                     {/* Content of Tab Pane 4 */}
                 </TabPane>
                 <TabPane key="5">
-                    Content of Tab Pane 5
+                    {/* Content of Tab Pane 5 */}
                 </TabPane>
             </Tabs>
             <div style={{ display: "flex", marginTop: "20px" }}>

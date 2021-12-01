@@ -44,7 +44,7 @@ function Routing() {
         <BrowserRouter>
             <Switch>
                 <Route path="/login" component={AttemptAuth} />
-                <Route path="/home" exact component={Home} />
+                <Route path="/home" exact component={DataArsip} />
                 <Route path="/ArsipBerkas" component={ArsipBerkas} />
                 <Route path="/PreviewPDF" component={PreviewPDF} />
                 <Route path="/DataArsip" component={DataArsip} />
