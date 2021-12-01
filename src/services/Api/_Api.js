@@ -3,7 +3,7 @@ import { ubahText } from '../Crypto';
 import { globalText } from '../Text/GlobalText';
 // export const baseURL = process.env.REACT_APP_BASE_URL_229
 export const baseURLMaster = process.env.REACT_APP_BASE_URL_MASTER
-export const baseURL = process.env.REACT_APP_BASE_URL_LOCAL
+export const baseURL = process.env.REACT_APP_BASE_URL
 // export const baseURL_LOCAL = process.env.REACT_APP_BASE_URL_LOCAL
 export const baseURL_229 = process.env.REACT_APP_BASE_URL_229
 // export const baseURL = process.env.REACT_APP_BASE_URL_JSON_SERVER
