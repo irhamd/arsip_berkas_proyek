@@ -9,7 +9,7 @@ function _Nav() {
 
 
   return (
-    <Menu mode="horizontal" style={{ borderColor: "#ef5c17", backgroundImage: "linear-gradient(90deg, rgb(233 154 115), #ed5a12 40%)", padding: "-4px" }}>
+    <Menu mode="horizontal" style={{ borderColor: "#ef5c17", backgroundImage: "linear-gradient(48deg, rgb(233 154 115) 30%, #ed5a12 35%)", padding: "-4px" }}>
       {/* <div className="logo" /> */}
       <Menu.Item key="mail" icon={<DropboxOutlined />}>
         <Link to="DataArsip" > Data Berkas Proyek </Link>

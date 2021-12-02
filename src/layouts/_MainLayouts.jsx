@@ -17,14 +17,14 @@ function _MainLayouts({ children }) {
   return (
     <Layout className="layout" style={{ background: "#ffe7db" }}>
       <div className="body">
-        <div style={{ width: "100%", marginLeft: "40px" }}>
+        <div style={{ width: "100%", marginLeft: "200px" }}>
           <h2 style={{ fontWeight: "bold", borderColor: "orange", marginLeft: "20px", marginBottom: "0px" }}> ARSIP BERKAS PROYEK  </h2>
           <_Nav />
         </div>
       </div>
       <Content style={{ padding: '0 50px' }}>
-      
-        <div className="" style={{ background: "#ffe7db", marginBottom :"20px" }}>
+
+        <div className="" style={{ background: "#ffe7db", marginBottom: "20px" }}>
 
           {children}
 
