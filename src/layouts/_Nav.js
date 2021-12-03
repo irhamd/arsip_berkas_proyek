@@ -11,11 +11,14 @@ function _Nav() {
   return (
     <Menu mode="horizontal" style={{ borderColor: "#ef5c17", backgroundImage: "linear-gradient(48deg, rgb(233 154 115) 30%, #ed5a12 35%)", padding: "-4px" }}>
       {/* <div className="logo" /> */}
-      <Menu.Item key="mail" icon={<DropboxOutlined />}>
+      <Menu.Item key="11" icon={<DropboxOutlined />}>
         <Link to="DataArsip" > Data Berkas Proyek </Link>
       </Menu.Item>
-      <Menu.Item key="app" icon={<SisternodeOutlined />}>
+      <Menu.Item key="22" icon={<SisternodeOutlined />}>
         <Link to="ArsipBerkas" > Arsip Berkas Baru </Link>
+      </Menu.Item>
+      <Menu.Item key="33" icon={<SisternodeOutlined />}>
+        <Link to="ShowDataPengadaan" > List Pengadaan </Link>
       </Menu.Item>
       <SubMenu style={{ float: "right" }} key="SubMenu" icon={<UserSwitchOutlined />} title="Admin">
         <Menu.Item key="setting:1">Logout</Menu.Item>

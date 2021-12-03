@@ -4,9 +4,9 @@ import AttemptAuth from '../auth/AttemptAuth';
 // import _Login from '../auth/_Login';
 import _MainLayouts from '../layouts/_MainLayouts';
  
-import ArsipBerkas from '../pages/Pemgadaan/ArsipBerkas';
 import DataArsip from '../pages/Pemgadaan/DataArsip';
 import PreviewPDF from '../pages/Pemgadaan/PreviewPDF';
+import ShowDataPengadaan from '../pages/Pemgadaan/ShowData/ShowDataPengadaan';
 import { Cache } from '../services/Cache';
 import { globalText } from '../services/Text/GlobalText';
 
@@ -33,9 +33,9 @@ function Routing() {
             <Switch>
                 <Route path="/login" component={AttemptAuth} />
                 <Route path="/home" exact component={DataArsip} />
-                <Route path="/ArsipBerkas" component={ArsipBerkas} />
                 <Route path="/PreviewPDF" component={PreviewPDF} />
                 <Route path="/DataArsip" component={DataArsip} />
+                <Route path="/ShowDataPengadaan" component={ShowDataPengadaan} />
                 <Route path="*" exact component={() => c404()} />
             </Switch>
         </BrowserRouter>

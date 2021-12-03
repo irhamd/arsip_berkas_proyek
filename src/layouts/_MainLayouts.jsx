@@ -17,8 +17,8 @@ function _MainLayouts({ children }) {
   return (
     <Layout className="layout" style={{ background: "#ffe7db" }}>
       <div className="body">
-        <div style={{ width: "100%", marginLeft: "200px" }}>
-          <h2 style={{ fontWeight: "bold", borderColor: "orange", marginLeft: "20px", marginBottom: "0px" }}> ARSIP BERKAS PROYEK  </h2>
+        <div style={{marginLeft: "200px" }}>
+          <h2 style={{ fontWeight: "bold", borderColor: "orange", marginLeft: "20px", marginBottom: "0px", marginTop :"5px" }}> ARSIP BERKAS PROYEK  </h2>
           <_Nav />
         </div>
       </div>
