@@ -47,6 +47,7 @@ export const _Input = (r) => {
                             // name={r.name}
                             disabled={r.disabled}
                             value={r.value}
+                            allowClear
                             rows={r.rows} size={r.size}
                             style={{ ...r.style }}
                             defaultValue={r.defaultValue} /> :
@@ -57,6 +58,7 @@ export const _Input = (r) => {
                             disabled={r.disabled}
                             onChange={r.onChange}
                             addonAfter={r.addonAfter}
+                            allowClear
                             maxLength={r.maxLength}
                             addonBefore={r.addonBefore}
                             style={{ ...r.style }}

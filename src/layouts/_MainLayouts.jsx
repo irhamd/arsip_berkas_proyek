@@ -7,6 +7,7 @@ import _Footer from "./_Footer";
 import { Layout, Menu, Breadcrumb } from 'antd';
 
 import "./../assets/css/style.css"
+import "./../assets/css/style_dua.css"
 
 import img from './../assets/img/top.png';
 import { RandomText } from "../services/Text/RandomText";

@@ -177,7 +177,7 @@ function DataArsip() {
             <Tabs activeKey={`${steps + 1}`} tabBarStyle={{ height: "1px" }} tabPosition="bottom">
                 <TabPane key="1">
                     <_Select size="large" option={jenisTender}
-                        val="val" 
+                        val="val"
                         onSelect={e => change("jenis", e)}
                         caption="caption" label="Jenis" />
                 </TabPane>

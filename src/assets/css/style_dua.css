@@ -1,0 +1,11 @@
+.lampiran {
+  padding: "5px";
+  background-color: "orange";
+  margin-bottom: "2px";
+}
+
+.lampiran :hover{
+  /* background-color: rgb(251 173 136); */
+  font-weight: bold;
+  margin: 0px -5px;
+}

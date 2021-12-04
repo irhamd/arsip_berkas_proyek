@@ -17,16 +17,16 @@ export const _grid = (r) => {
     )
 }
 
-export const _Row = (props) => {
+export const _Row = (r) => {
     return (
-        <Row style={{...props,margin: "0px" }}>
-            {props.children}
+        <Row onClick={r.onClick} style={{ margin: "0px",...r.style }} className = {r.className}>
+            {r.children}
         </Row>
     )
 }
 export const _Col = (r) => {
     return (
-        <Col sm={r.sm} style={{ ...r.style, margin: "0px" }}>
+        <Col sm={r.sm} style={{ ...r.style, margin: r.margin ? r.margin : "0px" }}>
             {r.children}
         </Col>
     )
