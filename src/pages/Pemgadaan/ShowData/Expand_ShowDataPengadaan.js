@@ -12,6 +12,12 @@ import PreviewPDF from '../../PDF/PreviewPDF';
 import pdf from "./../../../assets/img/pdf.png"
 import img from "./../../../assets/img/image.png"
 
+import excel from "./../../../assets/img/excel.png"
+import word from "./../../../assets/img/word.png"
+import power from "./../../../assets/img/power.png"
+import document from "./../../../assets/img/document.png"
+
+
 function ExpandShowDataPengadaan(pr) {
 
     const { data } = pr;
@@ -32,6 +38,20 @@ function ExpandShowDataPengadaan(pr) {
         })
     }, [])
 
+    useEffect(() => {
+        _Api.get("arsip-getdetailRegister?id_dokumen=" + data.id).then(res => {
+            setlist(res.data.data)
+        })
+    }, [])
+
+    const deleteFile = (fn, ext) => {
+        _Api.delete("deleteUpload?filename=" + fn+"&ext="+ext).then(res => {
+            // setlist(res.data.data)
+            pr.loadData()
+        })
+    }
+
+
     const closePreview = () => {
         setshowFile(false)
         setsrc(null)
@@ -46,7 +66,8 @@ function ExpandShowDataPengadaan(pr) {
             <_Row style={{ marginBottom: "5px" }}>
                 <_Col sm={1} />
                 <_Col sm={4} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
-                <_Col sm={7} style={stile.merah}> <b> Lampiran </b> </_Col>
+                <_Col sm={5} style={stile.merah}> <b> Lampiran </b> </_Col>
+                <_Col sm={2} style={stile.merah}> <b> Action </b> </_Col>
             </_Row>
 
             {list.length > 0 ?
@@ -56,7 +77,7 @@ function ExpandShowDataPengadaan(pr) {
                             {i > 0 && <hr style={{ margin: "5px" }} />}
                             <_Row style={{ marginBottom: "-2px" }}>
                                 <_Col sm={1} />
-                                <_Col sm={4}> <b> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
+                                <_Col sm={4}> <b style={{ color: "rgb(143 53 11)"}}> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
                                 <_Col sm={7}>
 
                                     <_Row>
@@ -65,7 +86,20 @@ function ExpandShowDataPengadaan(pr) {
                                                 <div style={{ padding: "5px", background: "rgb(255 195 166)", marginBottom: "2px" }} key={ii}>
                                                     <_Row className="lampiran">
                                                         <_Col sm={1} >
-                                                            <Image width={30} src={j.ext == "pdf" ? pdf : img} preview={false} />
+                                                            <Image width={30}
+                                                                src={
+                                                                    j.ext == "pdf" ? pdf 
+                                                                    : j.ext == "xls" ? excel 
+                                                                    : j.ext == "xlsx" ? excel 
+                                                                    : j.ext == "doc" ? word 
+                                                                    : j.ext == "docx" ? word 
+                                                                    : j.ext == "ppt" ? power 
+                                                                    : j.ext == "pptx" ? power 
+                                                                    : j.ext == "jpg" ? img 
+                                                                    : j.ext == "jpeg" ? img 
+                                                                    : j.ext == "png" ? img 
+                                                                    :document}
+                                                                preview={false} />
                                                         </_Col>
                                                         <_Col onClick={() => showFileData(j)} sm={8} key={ii} style={{ marginTop: "26px", cursor: "pointer" }}>   {ii + 1}. {j.deskripsi}  </_Col>
                                                         <_Col sm={2} key={ii} style={{ marginTop: "26px" }}>
@@ -74,7 +108,7 @@ function ExpandShowDataPengadaan(pr) {
                                                             </Popover>
                                                             <Popconfirm
                                                                 title="Hapus lampiran .!??"
-                                                                // onConfirm={confirm}
+                                                                onConfirm={() => deleteFile(j.filename, j.ext)}
                                                                 okText="Ya, Hapus"
                                                                 cancelText="Enggak"
                                                             >

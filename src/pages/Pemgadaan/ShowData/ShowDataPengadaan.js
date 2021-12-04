@@ -5,13 +5,13 @@ import { _Button, _Input, _Select } from '../../../services/Forms/Forms'
 
 import { Table, List, Avatar, Button, Skeleton, Steps, Space, Tabs, Form, Breadcrumb, Tag } from 'antd';
 import { RandomText } from '../../../services/Text/RandomText';
-import { DownloadOutlined, MenuOutlined, MinusCircleTwoTone, MinusSquareOutlined, PlusCircleTwoTone, PlusSquareOutlined } from '@ant-design/icons';
+import { DownloadOutlined, DownSquareOutlined, MenuOutlined, MinusCircleTwoTone, MinusSquareOutlined, PlusCircleTwoTone, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
 import { _Col, _Row } from '../../../services/Forms/LayoutBootstrap';
 import ExpandShowDataPengadaan from './Expand_ShowDataPengadaan';
+import moment from 'moment';
 
 
 function ShowDataPengadaan() {
-
 
     const [steps, setsteps] = useState(0)
     const [jenisPekerjaan, setjenisPekerjaan] = useState([])
@@ -46,6 +46,16 @@ function ShowDataPengadaan() {
 
         },
         {
+            title: 'Diff',
+            width: "200px",
+            sorter: true,
+            render: (record, i, j) =>
+                <div style={{ textAlign: "center" }}>
+                    {moment(record.created_at).fromNow()}
+                </div>
+
+        },
+        {
             title: 'Jenis',
             sorter: true,
             width: "140px",
@@ -64,6 +74,8 @@ function ShowDataPengadaan() {
         {
             title: 'Nama Pekerjaan',
             sorter: true,
+            width: "400px",
+
             render: (_, rc) =>
                 <div>
                     <b> {rc.namapekerjaan} </b>
@@ -85,7 +97,7 @@ function ShowDataPengadaan() {
             width: "100px",
             render: (rc, i, j) =>
                 <div>
-                    { rc.tahunanggaran }
+                    {rc.tahunanggaran}
                 </div>
 
         },
@@ -93,6 +105,7 @@ function ShowDataPengadaan() {
     ];
 
     const loadData = (val) => {
+        setlistPekerjaan([])
         _Api.get("arsip-showBerkasArsip", { params: val }).then(res => {
             setlistPekerjaan(res.data.data)
         })
@@ -107,12 +120,7 @@ function ShowDataPengadaan() {
             setjenisPekerjaan(res.data)
         })
     }
-
-    function onChangeTable(pagination, filters, sorter, extra) {
-        console.log('params', pagination, filters, sorter, extra);
-    }
-
-
+ 
     useEffect(() => {
         loadData()
         loadCombo()
@@ -139,7 +147,7 @@ function ShowDataPengadaan() {
                 <_Row>
                     <_Col sm={6} />
                     <_Button label="Cari Data" icon={<DownloadOutlined />} sm={2} block submit />
-                    <_Button label="Reset" icon={<DownloadOutlined />} sm={1} block />
+                    <_Button label="Reset" icon={<DownloadOutlined />}  sm={1} block />
                 </_Row>
             </Form>
 
@@ -151,20 +159,19 @@ function ShowDataPengadaan() {
                     expandedRowRender: record =>
                         <p style={{ margin: 0 }}>
                             <_Col style={{ background: "#ffd3bd", padding: " 2px 10px" }}>
-                                <ExpandShowDataPengadaan data={record} />
+                                <ExpandShowDataPengadaan loadData={loadData} data={record} />
                             </_Col>
                         </p>,
                     expandIcon: ({ expanded, onExpand, record }) =>
                         expanded ? (
-                            <MinusSquareOutlined onClick={e => onExpand(record, e)} />
+                            <DownSquareOutlined style={{ fontSize: "25px", color:"orange" }} onClick={e => onExpand(record, e)} />
                         ) : (
-                            <PlusSquareOutlined onClick={e => onExpand(record, e)} />
+                            <RightSquareOutlined  style={{ fontSize: "25px", color:"orange" }} onClick={e => onExpand(record, e)} />
                         )
                 }}
                 scroll={{ y: 700 }}
                 pagination={{ pageSize: 30 }}
-                columns={columns} dataSource={listPekerjaan}
-                onChange={onChangeTable} />
+                columns={columns} dataSource={listPekerjaan}/>
             <br />
 
         </_MainLayouts>

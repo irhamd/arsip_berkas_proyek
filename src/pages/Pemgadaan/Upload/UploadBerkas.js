@@ -101,7 +101,7 @@ function UploadBerkas(pr) {
         <div class="">
             <br />
             <Upload
-                // accept="all/*,.doc,.docx,.xlsx,.xls,.xml,.pdf"
+                accept="image/*,.doc,.docx,.xlsx,.xls,.pdf,.ppt,.pptx"
                 customRequest={uploadImage}
                 onChange={handleOnChange}
                 onRemove={onRemove}
