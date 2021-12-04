@@ -48,12 +48,14 @@ function ShowDataPengadaan() {
         {
             title: 'Jenis',
             sorter: true,
+            width: "140px",
             render: (_, rc) =>
                 <div> <b> {rc.jenis} </b> </div>
         },
         {
             title: 'Jenis Pekerjaan',
             sorter: true,
+            width: "300px",
             render: (_, rc) =>
                 <div>
                     <b> {rc.jenispekerjaan} </b>
@@ -69,6 +71,7 @@ function ShowDataPengadaan() {
         },
         {
             title: 'Nama PPK',
+            width: "340px",
             sorter: true,
             render: (_, rc) =>
                 <div>
@@ -77,11 +80,12 @@ function ShowDataPengadaan() {
         },
 
         {
-            title: 'Keterangan',
+            title: 'Tahun Anggaran',
             sorter: true,
-            width: "400px",
-            render: (record, i, j) =>
+            width: "100px",
+            render: (rc, i, j) =>
                 <div>
+                    { rc.tahunanggaran }
                 </div>
 
         },

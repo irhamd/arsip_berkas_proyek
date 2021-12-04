@@ -19,14 +19,14 @@ export const _grid = (r) => {
 
 export const _Row = (r) => {
     return (
-        <Row onClick={r.onClick} style={{ margin: "0px",...r.style }} className = {r.className}>
+        <Row onClick={r.onClick} style={{ margin: "0px", ...r.style }} className={r.className}>
             {r.children}
         </Row>
     )
 }
 export const _Col = (r) => {
     return (
-        <Col sm={r.sm} style={{ ...r.style, margin: r.margin ? r.margin : "0px" }}>
+        <Col sm={r.sm} style={{ ...r.style, margin: r.margin ? r.margin : "0px" }} onClick={r.onClick} className={r.className}>
             {r.children}
         </Col>
     )

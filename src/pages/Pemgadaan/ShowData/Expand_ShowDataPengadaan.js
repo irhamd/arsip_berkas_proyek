@@ -3,9 +3,9 @@ import _MainLayouts from '../../../layouts/_MainLayouts'
 import _Api from '../../../services/Api/_Api'
 import { _Button, _Input, _Select } from '../../../services/Forms/Forms'
 
-import { Table, List, Avatar, Button, Skeleton, Steps, Image, Tabs, Form, Breadcrumb, Tag, Spin } from 'antd';
+import { Table, List, Avatar, Button, Skeleton, Steps, Image, Tabs, Form, Breadcrumb, Tag, Spin, Popconfirm, Popover } from 'antd';
 import { RandomText } from '../../../services/Text/RandomText';
-import { DownloadOutlined, MenuOutlined, MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
+import { DeleteOutlined, DownloadOutlined, EditOutlined, FundViewOutlined, HighlightOutlined, MenuOutlined, MinusCircleTwoTone, PlusCircleTwoTone } from '@ant-design/icons';
 import { _Col, _Row } from '../../../services/Forms/LayoutBootstrap';
 import PreviewPDF from '../../PDF/PreviewPDF';
 
@@ -32,34 +32,61 @@ function ExpandShowDataPengadaan(pr) {
         })
     }, [])
 
+    const closePreview = () => {
+        setshowFile(false)
+        setsrc(null)
+    }
+
+
     const stile = {
         merah: { background: "red", padding: "5px", color: "white" },
     }
-       return (
+    return (
         <div>
-            <_Row style={{marginBottom :"5px"}}>
+            <_Row style={{ marginBottom: "5px" }}>
                 <_Col sm={1} />
-                <_Col sm={3} style={stile.merah}>  <b> Urian Kegiatan </b> </_Col>
+                <_Col sm={4} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
                 <_Col sm={7} style={stile.merah}> <b> Lampiran </b> </_Col>
             </_Row>
-         
+
             {list.length > 0 ?
                 list.map((item, i) => {
                     return (
                         <div key={i}>
-                            <_Row style={{marginBottom :"-10px"}}>
+                            {i > 0 && <hr style={{ margin: "5px" }} />}
+                            <_Row style={{ marginBottom: "-2px" }}>
                                 <_Col sm={1} />
-                                <_Col sm={3}> <b> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
+                                <_Col sm={4}> <b> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
                                 <_Col sm={7}>
-                                    <_Row className="lampiran">
+
+                                    <_Row>
                                         {item.detail.map((j, ii) => {
                                             return (
-                                                <div style={{ padding: "5px", background: "rgb(255 195 166)", marginBottom: "2px", cursor: "pointer" }} key={ii}>
-                                                    <_Row onClick={() => showFileData(j)} >
+                                                <div style={{ padding: "5px", background: "rgb(255 195 166)", marginBottom: "2px" }} key={ii}>
+                                                    <_Row className="lampiran">
                                                         <_Col sm={1} >
                                                             <Image width={30} src={j.ext == "pdf" ? pdf : img} preview={false} />
                                                         </_Col>
-                                                        <_Col sm={7} key={ii} style={{ marginTop: "26px" }}>   {ii + 1}. {j.deskripsi}  </_Col>
+                                                        <_Col onClick={() => showFileData(j)} sm={8} key={ii} style={{ marginTop: "26px", cursor: "pointer" }}>   {ii + 1}. {j.deskripsi}  </_Col>
+                                                        <_Col sm={2} key={ii} style={{ marginTop: "26px" }}>
+                                                            <Popover placement="bottom" content={<div> Preview </div>}>
+                                                                <Button type="primary" icon={<FundViewOutlined />} /> | &nbsp;
+                                                            </Popover>
+                                                            <Popconfirm
+                                                                title="Hapus lampiran .!??"
+                                                                // onConfirm={confirm}
+                                                                okText="Ya, Hapus"
+                                                                cancelText="Enggak"
+                                                            >
+                                                                <Popover placement="bottom" content={<div> Hapus </div>}>
+                                                                    <Button type="primary" danger icon={<DeleteOutlined />} /> | &nbsp;
+                                                                </Popover>
+
+                                                            </Popconfirm>
+                                                            <Popover placement="bottom" content={<div> Edit </div>}>
+                                                                <Button type="primary" shape="shape" icon={<EditOutlined />} />
+                                                            </Popover>
+                                                        </_Col>
                                                     </_Row>
                                                 </div>
                                             )
@@ -67,7 +94,6 @@ function ExpandShowDataPengadaan(pr) {
 
                                     </_Row>
                                 </_Col>
-                                <hr />
                             </_Row>
                         </div>
                     )
@@ -76,7 +102,9 @@ function ExpandShowDataPengadaan(pr) {
                 <Spin style={{ padding: "20px" }} />
             }
 
-            {list.length > 0 && <PreviewPDF showFile={showFile} close={() => setshowFile(false)} src={src} />}
+            {list.length > 0 && <PreviewPDF showFile={showFile} close={closePreview} src={src} />}
+            <br />
+
         </div>
     )
 }
