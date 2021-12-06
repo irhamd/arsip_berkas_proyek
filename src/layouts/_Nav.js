@@ -14,9 +14,7 @@ function _Nav() {
       <Menu.Item key="11" icon={<DropboxOutlined />}>
         <Link to="DataArsip" > Data Berkas Proyek </Link>
       </Menu.Item>
-      <Menu.Item key="22" icon={<SisternodeOutlined />}>
-        <Link to="ArsipBerkas" > Arsip Berkas Baru </Link>
-      </Menu.Item>
+      
       <Menu.Item key="33" icon={<SisternodeOutlined />}>
         <Link to="ShowDataPengadaan" > List Pengadaan </Link>
       </Menu.Item>

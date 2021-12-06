@@ -17,6 +17,7 @@ function ShowDataPengadaan() {
     const [jenisPekerjaan, setjenisPekerjaan] = useState([])
     const [listPekerjaan, setlistPekerjaan] = useState([])
     const [ppk, setppk] = useState([])
+    const [loading, setloading] = useState(false)
     const [jenispk, setjenispk] = useState("")
     const [isiForm, setisiForm] = useState({})
 
@@ -106,12 +107,16 @@ function ShowDataPengadaan() {
 
     const loadData = (val) => {
         setlistPekerjaan([])
+        setloading(true)
         _Api.get("arsip-showBerkasArsip", { params: val }).then(res => {
             setlistPekerjaan(res.data.data)
+            setloading(false)
+
         })
     }
 
     const loadCombo = (val) => {
+        setloading(true)
         _Api.post("getMasterData", { "masterData": "pegawai_m", ...val }).then(res => {
             setppk(res.data)
         })
@@ -120,7 +125,7 @@ function ShowDataPengadaan() {
             setjenisPekerjaan(res.data)
         })
     }
- 
+
     useEffect(() => {
         loadData()
         loadCombo()
@@ -135,19 +140,19 @@ function ShowDataPengadaan() {
             <Form labelCol={{ span: "8" }} wrapperCol={{ span: "10" }} onFinish={loadData}>
                 {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
 
+                <_Input label="Nama Pekerjaan" name="namappekerjaan" />
                 <_Select size="large" option={jenisPekerjaan}
                     val="id" name="jenispekerjaan"
                     caption="jenispekerjaan" label="Jenis Pekerjaan" />
 
 
-                <_Input label="Nama Pekerjaan" name="namappekerjaan" />
                 <_Input label="Tahun Anggaran (TA)" name="tahunanggaran" />
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
 
                 <_Row>
                     <_Col sm={6} />
                     <_Button label="Cari Data" icon={<DownloadOutlined />} sm={2} block submit />
-                    <_Button label="Reset" icon={<DownloadOutlined />}  sm={1} block />
+                    <_Button label="Reset" icon={<DownloadOutlined />} sm={1} block />
                 </_Row>
             </Form>
 
@@ -155,6 +160,7 @@ function ShowDataPengadaan() {
 
             <Table size="large"
                 rowKey="id"
+                loading={loading}
                 expandable={{
                     expandedRowRender: record =>
                         <p style={{ margin: 0 }}>
@@ -164,14 +170,14 @@ function ShowDataPengadaan() {
                         </p>,
                     expandIcon: ({ expanded, onExpand, record }) =>
                         expanded ? (
-                            <DownSquareOutlined style={{ fontSize: "25px", color:"orange" }} onClick={e => onExpand(record, e)} />
+                            <DownSquareOutlined style={{ fontSize: "25px", color: "orange" }} onClick={e => onExpand(record, e)} />
                         ) : (
-                            <RightSquareOutlined  style={{ fontSize: "25px", color:"orange" }} onClick={e => onExpand(record, e)} />
+                            <RightSquareOutlined style={{ fontSize: "25px", color: "orange" }} onClick={e => onExpand(record, e)} />
                         )
                 }}
                 scroll={{ y: 700 }}
                 pagination={{ pageSize: 30 }}
-                columns={columns} dataSource={listPekerjaan}/>
+                columns={columns} dataSource={listPekerjaan} />
             <br />
 
         </_MainLayouts>

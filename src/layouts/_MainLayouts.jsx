@@ -4,7 +4,9 @@ import { useEffect } from "react";
 import _Nav from "../layouts/_Nav";
 import _Footer from "./_Footer";
 
-import { Layout, Menu, Breadcrumb } from 'antd';
+import file from "./../assets/img/file2.png"
+
+import { Image, Layout } from 'antd';
 
 import "./../assets/css/style.css"
 import "./../assets/css/style_dua.css"
@@ -14,14 +16,24 @@ import { RandomText } from "../services/Text/RandomText";
 
 function _MainLayouts({ children }) {
 
+  const stile = {
+    title: {
+      fontWeight: "bold", borderColor: "orange", color: "#542615", marginBottom: "0px", marginTop: "5px",
+      fontFamily: "BrothersCircus, Arial, serif"
+    }
+  }
   const { Header, Content, Footer } = Layout;
   return (
     <Layout className="layout" style={{ background: "#ffe7db" }}>
       <div className="body">
-        <div style={{marginLeft: "200px" }}>
-          <h2 style={{ fontWeight: "bold", borderColor: "orange", marginLeft: "20px", marginBottom: "0px", marginTop :"5px" }}> ARSIP BERKAS PROYEK  </h2>
+        <div style={{ marginLeft: "160px" }}>
+          <h2 style={stile.title}> ARSIP BERKAS PROYEK  </h2>
           <_Nav />
         </div>
+      </div>
+
+      <div style={{ position: 'absolute', top: "0px", left: "50px" }}>
+        <Image src={file} width={95} preview={false} />
       </div>
       <Content style={{ padding: '0 50px' }}>
 

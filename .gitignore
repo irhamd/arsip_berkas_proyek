@@ -11,6 +11,7 @@
 # production
 /build
 /arsip_berkas
+arsip_berkas.rar
 # Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy Unrestricted
 # misc
 .DS_Store

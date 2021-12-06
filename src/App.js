@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import _Nav from "./layouts/_Nav";
 import _MainLayouts from "./layouts/_MainLayouts";
 import Forms from "./pages/Forms";
+import "./assets/font/font.css"
 import Routing from "./routing/routing";
 import "./App.less"
 import "./assets/css/home.less"
