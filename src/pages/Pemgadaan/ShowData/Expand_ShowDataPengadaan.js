@@ -16,6 +16,7 @@ import excel from "./../../../assets/img/excel.png"
 import word from "./../../../assets/img/word.png"
 import power from "./../../../assets/img/power.png"
 import document from "./../../../assets/img/document.png"
+import { baseURL_http } from '../../../services/Api/BaseUrl';
 
 
 function ExpandShowDataPengadaan(pr) {
@@ -28,7 +29,7 @@ function ExpandShowDataPengadaan(pr) {
 
     const showFileData = (j) => {
         setshowFile(true)
-        setsrc("http://192.168.137.1:3369/" + j.filename + "." + j.ext)
+        setsrc(baseURL_http + j.filename + "." + j.ext)
     }
 
 
@@ -104,7 +105,7 @@ function ExpandShowDataPengadaan(pr) {
                                                         <_Col onClick={() => showFileData(j)} sm={8} key={ii} style={{ marginTop: "26px", cursor: "pointer" }}>   {ii + 1}. {j.deskripsi}  </_Col>
                                                         <_Col sm={2} key={ii} style={{ marginTop: "26px" }}>
                                                             <Popover placement="bottom" content={<div> Preview </div>}>
-                                                                <Button type="primary" icon={<FundViewOutlined />} /> | &nbsp;
+                                                                <Button type="primary" onClick={() => showFileData(j)} icon={<FundViewOutlined />} /> | &nbsp;
                                                             </Popover>
                                                             <Popconfirm
                                                                 title="Hapus lampiran .!??"

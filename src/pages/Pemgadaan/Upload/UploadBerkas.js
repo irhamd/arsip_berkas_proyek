@@ -3,12 +3,13 @@ import { Upload, Progress, Space, List, Image, Button, Form, Pagination } from "
 import { CloudDownloadOutlined, DiffOutlined, FundViewOutlined, PlusOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import _MainLayouts from '../../../layouts/_MainLayouts';
-import _Api, { baseURL } from '../../../services/Api/_Api';
+import _Api from '../../../services/Api/_Api';
 import { _Button, _Date, _Input, _Label, _TitleBar } from '../../../services/Forms/Forms';
 // import { _Row } from '../../services/Forms/LayoutBootstrap';
 
 import moment from 'moment';
 import { _Row } from '../../../services/Forms/LayoutBootstrap';
+import { baseURL_R } from '../../../services/Api/BaseUrl';
 
 
 function UploadBerkas(pr) {
@@ -18,28 +19,12 @@ function UploadBerkas(pr) {
     const [loading, setloading] = useState(false);
     const [dataBerkas, setdataBerkas] = useState([]);
 
-    const [opsi, setopsi] = useState([]);
 
-    const [newId, setnewId] = useState(null);
-    const [pageNumber, setPageNumber] = useState(1);
-
-    const loadData = () => {
-        _Api.get("arsip-getBerkas").then(res => {
-            setdataBerkas(res.data.data)
-        })
-    }
-
-    const [formBerkas] = Form.useForm()
-
-    useEffect(() => {
-        loadData()
-    }, [])
-
+ 
 
     const uploadImage = async options => {
         const { onSuccess, onError, file, onProgress } = options;
         try {
-            setopsi(options)
 
             const F = new FormData();
             const config = {
@@ -63,7 +48,7 @@ function UploadBerkas(pr) {
 
 
             await axios.post(
-                `${baseURL}testUpload`, F,config
+                `${baseURL_R}testUpload`, F,config
             ).then(res => { });
 
             // console.log(`options`, options)

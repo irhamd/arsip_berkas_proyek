@@ -59,9 +59,7 @@ function DataArsip() {
         })
     }
 
-    function onChangeTable(pagination, filters, sorter, extra) {
-        console.log('params', pagination, filters, sorter, extra);
-    }
+   
 
     const columns = [
 
@@ -131,7 +129,7 @@ function DataArsip() {
 
     useEffect(() => {
         loadData()
-        cekRefresh()
+        // cekRefresh()
     }, [])
 
 
@@ -195,7 +193,9 @@ function DataArsip() {
                         <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" required />
                     </Form>
                     {/* register pengadaan */}
-                    <Table size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }} columns={columns} dataSource={registerpengadaan} onChange={onChangeTable} />
+                    <Table size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }}
+                        columns={columns}
+                        dataSource={registerpengadaan} />
                 </TabPane>
                 <TabPane key="4">
 
