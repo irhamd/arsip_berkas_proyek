@@ -27,7 +27,8 @@ function _MainLayouts({ children }) {
     <Layout className="layout" style={{ background: "#ffe7db" }}>
       <div className="body">
         <div style={{ marginLeft: "160px" }}>
-          <h2 style={stile.title}> ARSIP BERKAS PROYEK  </h2>
+          <h2 style={stile.title}> <span style={{ color: "#9a3813" }}>
+            ARSIP ONLINE </span> BERKAS PROYEK  </h2>
           <_Nav />
         </div>
       </div>
@@ -43,7 +44,7 @@ function _MainLayouts({ children }) {
 
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>Ant Design ©2021 Created by <b> @FHD </b></Footer>
+      <Footer style={{ textAlign: 'center' }}>simrs©rsudkotamataram 2021 Created by <b> @FHD </b></Footer>
     </Layout>
   );
 }

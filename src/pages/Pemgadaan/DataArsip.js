@@ -121,7 +121,10 @@ function DataArsip() {
     const simpanArsip = () => {
         _Api.post("simpanDataBerkas", isiForm).then(res => {
             // console.log(`res.data`, res.data)
+            if(res.data.sts == "1")
             _Toastr.success("Suksess .!")
+            else 
+            _Toastr.error("Gagal simpan data .! .!")
 
         })
     }

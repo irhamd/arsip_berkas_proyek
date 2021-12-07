@@ -36,6 +36,7 @@ module.exports = {
                             '@btn-disable-color': 'black',
                             '@btn-disable-bg': '@disabled-color',
                             '@btn-disable-border': '@disabled-color',
+                            '@input-icon-color': '@primary-color',
                             // @table-bg: @component-background;
                             '@table-header-bg': '#ec580f',
                             '@table-header-color': '#eaf0f5', // thead table bg

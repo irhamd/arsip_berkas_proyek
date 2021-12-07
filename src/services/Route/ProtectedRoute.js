@@ -15,11 +15,9 @@ function ProtectedRoute({ component: Component, ...rest }) {
 
     Object.values(globalText).forEach(val => {
            var cek = sessionStorage.getItem(val) != null ? true : author = false;
-           console.log(cek)
     });
     
     const [Auth] = useState(author)
-    // const [Auth] = useState(true) // cek
 
     return (
         <Route

@@ -3,12 +3,13 @@ import _MainLayouts from '../../../layouts/_MainLayouts'
 import _Api from '../../../services/Api/_Api'
 import { _Button, _Input, _Select } from '../../../services/Forms/Forms'
 
-import { Table, List, Avatar, Button, Skeleton, Steps, Space, Tabs, Form, Breadcrumb, Tag } from 'antd';
+import { Table, Form } from 'antd';
 import { RandomText } from '../../../services/Text/RandomText';
-import { DownloadOutlined, DownSquareOutlined, MenuOutlined, MinusCircleTwoTone, MinusSquareOutlined, PlusCircleTwoTone, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
+import { DownSquareOutlined, DropboxOutlined, FileSearchOutlined, MinusSquareOutlined, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
 import { _Col, _Row } from '../../../services/Forms/LayoutBootstrap';
 import ExpandShowDataPengadaan from './Expand_ShowDataPengadaan';
 import moment from 'moment';
+import { useHistory } from 'react-router';
 
 
 function ShowDataPengadaan() {
@@ -23,15 +24,7 @@ function ShowDataPengadaan() {
 
     var random = RandomText;
 
-    const change = (field, isi) => {
-        setisiForm({
-            id: random,
-            ...isiForm,
-            [field]: isi
-        })
-    }
-
-
+    var histori = useHistory()
 
     // const DragHandle = sortableHandle(() => <MenuOutlined style={{ cursor: 'grab', color: '#999' }} />);
 
@@ -105,6 +98,10 @@ function ShowDataPengadaan() {
 
     ];
 
+    const stile = {
+        icon: { fontSize: "25px", color: "orange" }
+    }
+
     const loadData = (val) => {
         setlistPekerjaan([])
         setloading(true)
@@ -150,9 +147,9 @@ function ShowDataPengadaan() {
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
 
                 <_Row>
-                    <_Col sm={6} />
-                    <_Button label="Cari Data" icon={<DownloadOutlined />} sm={2} block submit />
-                    <_Button label="Reset" icon={<DownloadOutlined />} sm={1} block />
+                    <_Col sm={5} />
+                    <_Button label="Cari Data" icon={<FileSearchOutlined />} sm={2} block submit />
+                    <_Button label="Pekerjaan Baru" icon={<DropboxOutlined />} onClick={() => histori.push("/DataArsip")} color="green" sm={2} block />
                 </_Row>
             </Form>
 
@@ -170,9 +167,9 @@ function ShowDataPengadaan() {
                         </p>,
                     expandIcon: ({ expanded, onExpand, record }) =>
                         expanded ? (
-                            <DownSquareOutlined style={{ fontSize: "25px", color: "orange" }} onClick={e => onExpand(record, e)} />
+                            <MinusSquareOutlined style={stile.icon} onClick={e => onExpand(record, e)} />
                         ) : (
-                            <RightSquareOutlined style={{ fontSize: "25px", color: "orange" }} onClick={e => onExpand(record, e)} />
+                            < PlusSquareOutlined style={stile.icon} onClick={e => onExpand(record, e)} />
                         )
                 }}
                 scroll={{ y: 700 }}
