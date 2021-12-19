@@ -73,10 +73,10 @@ function ExpandShowDataPengadaan(pr) {
     return (
         <div>
             <_Row style={{ marginBottom: "5px" }}>
-                <_Col sm={1} />
-                <_Col sm={4} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
-                <_Col sm={5} style={stile.merah}> <b> Lampiran </b> </_Col>
-                <_Col sm={2} style={stile.merah}> <b> Action </b> </_Col>
+                {/* <_Col sm={1} /> */}
+                <_Col sm={3} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
+                <_Col sm={4} style={stile.merah}> <b> Lampiran </b> </_Col>
+                <_Col sm={3} style={stile.merah}> <b> Action </b> </_Col>
             </_Row>
 
             {list.length > 0 ?
@@ -85,8 +85,8 @@ function ExpandShowDataPengadaan(pr) {
                         <div key={i}>
                             {i > 0 && <hr style={{ margin: "5px" }} />}
                             <_Row style={{ marginBottom: "-2px" }}>
-                                <_Col sm={1} />
-                                <_Col sm={4}> <b style={{ color: "rgb(143 53 11)" }}> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
+                                {/* <_Col sm={1} /> */}
+                                <_Col sm={3}> <b style={{ color: "rgb(143 53 11)" }}> {i + 1} . {item.registerpengadaan.toUpperCase()} </b> </_Col>
                                 <_Col sm={7}>
 
                                     <_Row>
@@ -110,7 +110,7 @@ function ExpandShowDataPengadaan(pr) {
                                                                                                             : document}
                                                                 preview={false} />
                                                         </_Col>
-                                                        <_Col onClick={() => showFileData(j)} sm={8} key={ii} style={{ marginTop: "26px", cursor: "pointer" }}>   {ii + 1}. {j.deskripsi}  </_Col>
+                                                        <_Col onClick={() => showFileData(j)} sm={6} key={ii} style={{ marginTop: "26px", cursor: "pointer" }}>   {ii + 1}. {j.deskripsi}  </_Col>
                                                         <_Col sm={3} key={ii} style={{ marginTop: "26px" }}>
                                                             <Checkbox > &nbsp; </Checkbox>
                                                             <Popover placement="bottom" content={<div> Preview </div>}>
@@ -127,9 +127,9 @@ function ExpandShowDataPengadaan(pr) {
                                                                 </Popover>
 
                                                             </Popconfirm>
-                                                            <Popover placement="bottom" content={<div> Edit </div>}>
+                                                            {/* <Popover placement="bottom" content={<div> Edit </div>}>
                                                                 <Button type="primary" shape="shape" icon={<EditOutlined />} />
-                                                            </Popover>
+                                                            </Popover> */}
                                                         </_Col>
                                                     </_Row>
                                                 </div>

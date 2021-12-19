@@ -194,6 +194,9 @@ function DataArsip() {
                         <_Input label="Nama Pekerjaan" onChange={e => change("namapekerjaan", e.target.value)} required />
                         <_Input label="Tahun Anggaran (TA)" onChange={e => change("tahunanggaran", e.target.value)} required />
                         <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" required />
+                        <_Input label="HPS (Harga Perkiraan Sendiri)" onChange={e => change("hps", e.target.value)} required />
+                        <_Input label="Nilai Kontrak" onChange={e => change("nilaikontrak", e.target.value)} required />
+                        {/* <_Select label="" onSelect={e => change("hps", e)} option={ppk} val="id" caption="namapegawai" required /> */}
                     </Form>
                     {/* register pengadaan */}
                     <Table size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }}

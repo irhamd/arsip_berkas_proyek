@@ -36,7 +36,7 @@ function _MainLayouts({ children }) {
       <div style={{ position: 'absolute', top: "0px", left: "50px" }}>
         <Image src={file} width={95} preview={false} />
       </div>
-      <Content style={{ padding: '0 50px' }}>
+      <Content style={{ padding: '0 20px' }}>
 
         <div className="" style={{ background: "#ffe7db", marginBottom: "20px" }}>
 

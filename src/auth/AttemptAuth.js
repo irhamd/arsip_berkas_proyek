@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Form, Input, Button, Checkbox } from 'antd';
-import { AppstoreOutlined, KeyOutlined, MailOutlined, PoweroffOutlined, UnlockOutlined, IdcardTwoTone, SmileTwoTone, BulbTwoTone, UnlockTwoTone, UserOutlined, HighlightFilled, ImportOutlined } from '@ant-design/icons';
+import { Form, Input} from 'antd';
+import { BulbTwoTone, UnlockTwoTone,ImportOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router';
 import Layout, { Content, Footer, Header } from 'antd/lib/layout/layout'
 import { _Button } from '../services/Forms/Forms';
@@ -19,8 +19,6 @@ import logo from "./../assets/img/file2.png"
 
 function AttemptAuth() {
 
-    const histori = useHistory();
-    const [obj, setobj] = useState({})
     const [username, setUsername] = useState()
     const [password, setpassword] = useState()
     // const [error, setError] = useState(false)
@@ -80,7 +78,7 @@ function AttemptAuth() {
 
     return (
         <_MainLayouts >
-            <div style={{ width: "100%", padding: "0px 410px" }}>
+            <div style={{ width: "100%", padding: "0px 10%" }}>
                 <h1 style={{ textAlign: "center", marginTop: "8%" }}></h1>
                 <div style={{ textAlign: "center" }}>
                     <p><img width="300" src={logo} alt="" /></p>
