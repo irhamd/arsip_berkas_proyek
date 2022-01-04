@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Modal, Form, Popover, Button, Tag, Radio, Spin } from 'antd';
 import _Api from '../../../services/Api/_Api';
-import { _Button, _Input, _RadioGroup, _Select } from '../../../services/Forms/Forms';
+import { _Button, _Input, _Number, _RadioGroup, _Select } from '../../../services/Forms/Forms';
 import { _Row } from '../../../services/Forms/LayoutBootstrap';
+import { _Toastr } from '../../../services/Toastr/Notify/_Toastr';
 
 function EditPekerjaan(pr) {
 
@@ -17,7 +18,7 @@ function EditPekerjaan(pr) {
         setloading(true)
         formData.setFieldsValue({
             ...recordData,
-            tahunanggaran: recordData.tahunanggaran.toString(),
+            jenispekerjaan: recordData.id_jenispekerjaan,
         })
         _Api.post("getMasterData", { "masterData": "pegawai_m", ...val }).then(res => {
             setppk(res.data)
@@ -38,11 +39,30 @@ function EditPekerjaan(pr) {
 
     const simpanData = (val) => {
         var obj = {
-            ...recordData,
+            id: recordData.id,
             ...val,
-            // id_ppk : 
         }
-        console.log(`val`, obj,)
+
+        console.log(`obj`, obj)
+        setloading(true)
+        _Api.post("simpanDataBerkas", obj).then(res => {
+            if (res.data.sts == "1") {
+                pr.loadData()
+                _Toastr.success("Suksess .!")
+                setloading(false)
+
+
+            }
+            else {
+                _Toastr.error("Gagal simpan data .! .!")
+                setloading(false)
+
+            }
+
+        })
+
+
+
     }
 
 
@@ -55,16 +75,18 @@ function EditPekerjaan(pr) {
                 // onOk={this.handleOk}
                 // onCancel={this.handleCancel}
                 footer={[]} >
-                <Spin spinning={loading}>
+                <Spin spinning={false}>
 
                     <Form layout="vertical" form={formData} onFinish={simpanData}>
                         {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
                         <_Input label="Nama Pekerjaan" name="namapekerjaan" required />
-                        <_Input label="Tahun Anggaran (TA)" name="tahunanggaran" required />
+                        <_Number format label="Tahun Anggaran (TA)" name="tahunanggaran" required />
                         <_Select label="PPK" name="id_ppk" option={ppk} val="id" caption="namapegawai" required />
-                        <_Select size="large" option={jenisPekerjaan} required
-                            val="id" name="id_jenispekerjaan"
-                            caption="jenispekerjaan" label="Jenis Pekerjaan" />
+                        <_Select label="Jenis Pekerjaan" name="jenispekerjaan" option={jenisPekerjaan} val="id" caption="jenispekerjaan" required />
+
+                        {/* <_Select  option={jenisPekerjaan} required
+                            val="id" name="jenispekerjaan"
+                        caption="jenispekerjaan" label="Jenis Pekerjaan" /> */}
 
                         <Form.Item label="Jenis" name="jenis"
                             rules={[
@@ -72,16 +94,17 @@ function EditPekerjaan(pr) {
                                     required: true,
                                     message: 'Masukkan jenis ',
                                 },
-                            ]}
-                        >
+                            ]}>
                             <Radio.Group >
                                 <Radio value={"NonTender"}>Non Tender</Radio>
                                 <Radio value={"Tender"}>Tender</Radio>
                             </Radio.Group>
                         </Form.Item>
+                        <_Number format label="Nilai Kontrak" name="nilaikontrak" required />
+                        <_Number format label="HPS" name="hps" required />
                         <hr />
                         <_Row>
-                            <_Button sm={6} block label="Simpan" submit btnSave />
+                            <_Button sm={6} block label="Simpan" submit btnSave loading={loading} />
                             <_Button sm={5} block label="Batal" cancel onClick={pr.close} />
                         </_Row>
 

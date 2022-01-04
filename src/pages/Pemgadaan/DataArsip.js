@@ -3,7 +3,7 @@ import { Table, List, Avatar, Button, Skeleton, Steps, Space, Tabs, Form, Breadc
 import _MainLayouts from '../../layouts/_MainLayouts';
 import _Api from '../../services/Api/_Api';
 import ExpandArsip from './ExpandArsip';
-import { _Button, _Input, _Select } from '../../services/Forms/Forms';
+import { _Button, _Input, _Number, _Select } from '../../services/Forms/Forms';
 import { Nav } from 'react-bootstrap';
 import _Nav from '../../layouts/_Nav';
 import UploadBerkas from './Upload/UploadBerkas';
@@ -13,6 +13,7 @@ import { DoubleLeftOutlined, DoubleRightOutlined, DownloadOutlined } from '@ant-
 import { RandomText } from '../../services/Text/RandomText';
 import { _Toastr } from '../../services/Toastr/Notify/_Toastr';
 import { cekRefresh } from '../../services/Text/CekRefresh';
+import { useHistory } from 'react-router-dom';
 function DataArsip() {
 
     const [dataArsip, setdataArsip] = useState([])
@@ -25,6 +26,8 @@ function DataArsip() {
     const [jenispk, setjenispk] = useState("")
     const [isiForm, setisiForm] = useState({})
     const [arr, setarr] = useState([])
+
+    const history = useHistory();
 
     var random = RandomText;
 
@@ -121,8 +124,11 @@ function DataArsip() {
     const simpanArsip = () => {
         _Api.post("simpanDataBerkas", isiForm).then(res => {
             // console.log(`res.data`, res.data)
-            if(res.data.sts == "1")
-            _Toastr.success("Suksess .!")
+            if(res.data.sts == "1"){
+
+                _Toastr.success("Suksess .!")
+                history.push("/ShowDataPengadaan")
+            }
             else 
             _Toastr.error("Gagal simpan data .! .!")
 
@@ -194,8 +200,8 @@ function DataArsip() {
                         <_Input label="Nama Pekerjaan" onChange={e => change("namapekerjaan", e.target.value)} required />
                         <_Input label="Tahun Anggaran (TA)" onChange={e => change("tahunanggaran", e.target.value)} required />
                         <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" required />
-                        <_Input label="HPS (Harga Perkiraan Sendiri)" onChange={e => change("hps", e.target.value)} required />
-                        <_Input label="Nilai Kontrak" onChange={e => change("nilaikontrak", e.target.value)} required />
+                        <_Number label="HPS (Harga Perkiraan Sendiri)" onChange={e => change("hps", e)} format required />
+                        <_Number label="Nilai Kontrak" onChange={e => change("nilaikontrak", e)} format required />
                         {/* <_Select label="" onSelect={e => change("hps", e)} option={ppk} val="id" caption="namapegawai" required /> */}
                     </Form>
                     {/* register pengadaan */}

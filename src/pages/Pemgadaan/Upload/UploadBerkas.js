@@ -83,7 +83,7 @@ function UploadBerkas(pr) {
 
 
     return (
-        <div class="">
+        <div className="">
             <br />
             <Upload
                 accept="image/*,.doc,.docx,.xlsx,.xls,.pdf,.ppt,.pptx"

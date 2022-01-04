@@ -159,11 +159,11 @@ function ShowDataPengadaan() {
 
     const loadData = (val) => {
         setlistPekerjaan([])
+        setedit(false)
         setloading(true)
         _Api.get("arsip-showBerkasArsip", { params: val }).then(res => {
             setlistPekerjaan(res.data.data)
             setloading(false)
-
         })
     }
 
@@ -194,12 +194,8 @@ function ShowDataPengadaan() {
                 <_Select size="large" option={jenisPekerjaan}
                     val="id" name="jenispekerjaan"
                     caption="jenispekerjaan" label="Jenis Pekerjaan" />
-
-
                 <_Input label="Tahun Anggaran (TA)" name="tahunanggaran" />
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
-
-
                 <_Row>
                     <_Col sm={5} />
                     <_Button label="Cari Data" icon={<FileSearchOutlined />} sm={2} block submit />
@@ -207,7 +203,7 @@ function ShowDataPengadaan() {
                 </_Row>
             </Form>
 
-            {edit && <EditPekerjaan show={edit} close={() => setedit(false)} recordData={recordData} />}
+            {edit && <EditPekerjaan show={edit} close={() => setedit(false)} loadData={loadData} recordData={recordData} />}
             <br />
 
             <Table size="large"
