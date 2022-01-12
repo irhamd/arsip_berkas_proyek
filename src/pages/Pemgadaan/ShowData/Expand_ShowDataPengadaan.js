@@ -17,6 +17,7 @@ import word from "./../../../assets/img/word.png"
 import power from "./../../../assets/img/power.png"
 import document from "./../../../assets/img/document.png"
 import { baseURL_http, baseURL_R, baseURL_R_file } from '../../../services/Api/BaseUrl';
+import UploadLagi from './UploadLagi';
 
 
 function ExpandShowDataPengadaan(pr) {
@@ -25,6 +26,7 @@ function ExpandShowDataPengadaan(pr) {
     const [list, setlist] = useState([])
 
     const [showFile, setshowFile] = useState(false)
+    const [uploadL, setuploadL] = useState(false)
     const [src, setsrc] = useState("")
     const [idd, setidd] = useState(null)
 
@@ -66,6 +68,12 @@ function ExpandShowDataPengadaan(pr) {
         setsrc(null)
     }
 
+    const uploadLagi = () => {
+        // console.log(`item`, data)
+        setuploadL(true)
+    }
+
+
 
     const stile = {
         merah: { background: "red", padding: "5px", color: "white" },
@@ -78,6 +86,8 @@ function ExpandShowDataPengadaan(pr) {
                 <_Col sm={4} style={stile.merah}> <b> Lampiran </b> </_Col>
                 <_Col sm={3} style={stile.merah}> <b> Action </b> </_Col>
             </_Row>
+
+            {uploadL && <UploadLagi show={uploadL} onclose={() => setuploadL(false)} loadData={loadData} recordData={data} />}
 
             {list.length > 0 ?
                 list.map((item, i) => {
@@ -147,6 +157,8 @@ function ExpandShowDataPengadaan(pr) {
             }
 
             {list.length > 0 && <PreviewPDF showFile={showFile} close={closePreview} src={src} />}
+            <br />
+            <p style={{ textAlign: "center" }}> <_Button onClick={uploadLagi} sm={3} block label="Upload Lagi" /> </p>
             <br />
         </div>
     )

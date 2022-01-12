@@ -214,6 +214,8 @@ function ShowDataPengadaan() {
                         <p style={{ margin: 0 }}>
                             <_Col style={{ background: "#ffd3bd", padding: " 2px 10px" }}>
                                 <ExpandShowDataPengadaan loadData={loadData} data={record} />
+
+
                             </_Col>
                         </p>,
                     expandIcon: ({ expanded, onExpand, record }) =>
