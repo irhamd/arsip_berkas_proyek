@@ -80,19 +80,24 @@ function ExpandShowDataPengadaan(pr) {
     }
     return (
         <div>
-            <_Row style={{ marginBottom: "5px" }}>
-                {/* <_Col sm={1} /> */}
+            {/* <_Row style={{ marginBottom: "5px" }}>
                 <_Col sm={3} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
                 <_Col sm={4} style={stile.merah}> <b> Lampiran </b> </_Col>
                 <_Col sm={3} style={stile.merah}> <b> Action </b> </_Col>
-            </_Row>
+            </_Row> */}
 
-            {uploadL && <UploadLagi show={uploadL} onclose={() => setuploadL(false)} loadData={loadData} recordData={data} />}
+            <div style={{ marginBottom: "5px", display: "flex", minWidth: "600px" }} >
+                <_Col sm={3} style={stile.merah}>  <b>  &nbsp; Urian Kegiatan </b> </_Col>
+                <_Col sm={4} style={stile.merah}> <b> Lampiran </b> </_Col>
+                <_Col sm={3} style={stile.merah}> <b> Action </b> </_Col>
+            </div>
+
+            {uploadL && <UploadLagi show={uploadL} onclose={() => setuploadL(false)} loadData={loadData} loadDataHead={pr.loadData} recordData={data} />}
 
             {list.length > 0 ?
                 list.map((item, i) => {
                     return (
-                        <div key={i}>
+                        <div key={i}  >
                             {i > 0 && <hr style={{ margin: "5px" }} />}
                             <_Row style={{ marginBottom: "-2px" }}>
                                 {/* <_Col sm={1} /> */}
@@ -133,7 +138,7 @@ function ExpandShowDataPengadaan(pr) {
                                                                 cancelText="Enggak"
                                                             >
                                                                 <Popover placement="bottom" content={<div> Hapus </div>}>
-                                                                    <Button loading={j.id == idd ? true : false} type="primary" danger icon={<DeleteOutlined />} /> | &nbsp;
+                                                                    <Button loading={j.id == idd ? true : false} type="primary" danger icon={<DeleteOutlined />} /> 
                                                                 </Popover>
 
                                                             </Popconfirm>

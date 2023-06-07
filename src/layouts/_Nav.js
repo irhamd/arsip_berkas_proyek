@@ -1,7 +1,7 @@
 import React from "react";
 import srcAvatar from "../assets/img/avatars/avatar.jpg";
 import { dataUser } from "../services/Cache/Auth";
-import { SettingOutlined, SisternodeOutlined, DropboxOutlined, UserSwitchOutlined, LogoutOutlined } from '@ant-design/icons';
+import { SettingOutlined, SisternodeOutlined, DropboxOutlined, UserSwitchOutlined, LogoutOutlined, UserAddOutlined, AccountBookFilled, AccountBookTwoTone, UsergroupAddOutlined } from '@ant-design/icons';
 import { Menu } from 'antd';
 import { Link } from "react-router-dom";
 function _Nav() {
@@ -29,11 +29,14 @@ function _Nav() {
     }}>
       {/* <div className="logo" /> */}
       <Menu.Item key="11" icon={<DropboxOutlined />}>
-        <Link to="DataArsip" > Arsip Berkas Pekerjaan </Link>
+        <Link to="DataArsip" > Tambah Arsip Berkas Pekerjaan </Link>
       </Menu.Item>
 
       <Menu.Item key="33" icon={<SisternodeOutlined />}>
-        <Link to="ShowDataPengadaan" > List Pengadaan </Link>
+        <Link to="ShowDataPengadaan" > Data Arsip </Link>
+      </Menu.Item>
+      <Menu.Item key="33" icon={<UsergroupAddOutlined />}>
+        <Link to="ManajemenUser" > Manajemen User </Link>
       </Menu.Item>
       <SubMenu style={stile.menu} key="sub7"
         icon={<UserSwitchOutlined style={{ fontSize: "20px" }} />}

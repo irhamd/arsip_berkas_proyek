@@ -4,6 +4,7 @@ import _Api from '../../../services/Api/_Api';
 import { _Button, _Input, _Number, _RadioGroup, _Select } from '../../../services/Forms/Forms';
 import { _Row } from '../../../services/Forms/LayoutBootstrap';
 import { _Toastr } from '../../../services/Toastr/Notify/_Toastr';
+import { Col } from 'react-bootstrap';
 
 function EditPekerjaan(pr) {
 
@@ -66,6 +67,10 @@ function EditPekerjaan(pr) {
     }
 
 
+    const sumberDana = [
+        { val: "APBD", caption: "APBD" },
+        { val: "BLUD", caption: "BLUD" },
+    ]
 
     return (
         <div>
@@ -79,11 +84,20 @@ function EditPekerjaan(pr) {
 
                     <Form layout="vertical" form={formData} onFinish={simpanData}>
                         {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
+                        <_Select label="Sumber Dana" name="sumberdana" option={sumberDana} val="val" caption="caption" required />
                         <_Input label="Nama Pekerjaan" name="namapekerjaan" required />
                         <_Number format label="Tahun Anggaran (TA)" name="tahunanggaran" required />
                         <_Select label="PPK" name="id_ppk" option={ppk} val="id" caption="namapegawai" required />
                         <_Select label="Jenis Pekerjaan" name="jenispekerjaan" option={jenisPekerjaan} val="id" caption="jenispekerjaan" required />
-
+                        <Col sm={12}>
+                            <label> Cara Pembelian : &nbsp; </label>
+                            <Form.Item name="carapembelian">
+                                <Radio.Group>
+                                    <Radio value={"langsung"}>Langsung</Radio>
+                                    <Radio value={"tidak langsung"}>Tidak Langsung</Radio>
+                                </Radio.Group>
+                            </Form.Item>
+                        </Col>
                         {/* <_Select  option={jenisPekerjaan} required
                             val="id" name="jenispekerjaan"
                         caption="jenispekerjaan" label="Jenis Pekerjaan" /> */}
@@ -96,12 +110,13 @@ function EditPekerjaan(pr) {
                                 },
                             ]}>
                             <Radio.Group >
-                                <Radio value={"NonTender"}>Non Tender</Radio>
+                                <Radio value={"Non Tender"}>Non Tender</Radio>
                                 <Radio value={"Tender"}>Tender</Radio>
+                                <Radio value={"eCatalog"}>E-Catalog</Radio>
                             </Radio.Group>
                         </Form.Item>
                         <_Number format label="Nilai Kontrak" name="nilaikontrak" required />
-                        <_Number format label="HPS" name="hps" required />
+                        {/* <_Number format label="HPS" name="hps" required /> */}
                         <hr />
                         <_Row>
                             <_Button sm={6} block label="Simpan" submit btnSave loading={loading} />

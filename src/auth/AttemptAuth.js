@@ -28,6 +28,7 @@ function AttemptAuth() {
 
 
     useEffect(() => {
+        setLoading(false)
         LogOut();
     }, [])
 
@@ -104,6 +105,7 @@ function AttemptAuth() {
                             <Form.Item>
                                 <_Button
                                     type="primary"
+                                    style={{marginTop :"2px"}}
                                     submit
                                     icon={<ImportOutlined />}
                                     loading={loading}

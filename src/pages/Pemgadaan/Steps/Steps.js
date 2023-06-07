@@ -8,7 +8,7 @@ function RenderSteps(pr) {
     return (
         <div>
             <Steps style={{ background: "#f8a477", padding: "10px", borderRadius: "0px 10px" }} current={pr.steps}>
-                <Step title="Tender / Non Tender" description="Jenis pekerjaan" />
+                <Step title="Jenis Pekerjaan" description="Jenis pekerjaan" />
                 <Step title="Jenis Pengadaan" description="Pilih jenis pengadaan" />
                 <Step title="Register Pengadaan" description="Uraian kegiatan" />
                 <Step title="Review Berkas" description="Upload berkas ," />

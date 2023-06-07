@@ -3,15 +3,17 @@ import _MainLayouts from '../../../layouts/_MainLayouts'
 import _Api from '../../../services/Api/_Api'
 import { _Button, _Checkbox, _Input, _Select } from '../../../services/Forms/Forms'
 
-import { Table, Form, Popover, Button, Tag } from 'antd';
+import { Table, Form, Popover, Button, Tag, Popconfirm, Radio } from 'antd';
 import { RandomText } from '../../../services/Text/RandomText';
-import { DownSquareOutlined, DropboxOutlined, EditOutlined, FileSearchOutlined, MinusSquareOutlined, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
+import { DeleteColumnOutlined, DownSquareOutlined, DropboxOutlined, EditOutlined, FileSearchOutlined, MinusSquareOutlined, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
 import { _Col, _Row } from '../../../services/Forms/LayoutBootstrap';
 import ExpandShowDataPengadaan from './Expand_ShowDataPengadaan';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import EditPekerjaan from './EditPekerjaan';
 import { formatNumber } from '../../../services/Text/GlobalText';
+import { Col } from 'react-bootstrap';
+import { _Toastr } from '../../../services/Toastr/Notify/_Toastr';
 
 
 function ShowDataPengadaan() {
@@ -35,18 +37,40 @@ function ShowDataPengadaan() {
         setedit(true)
         setrecordData(rc)
     }
+    const hapusBerkas = (rc) => {
+        console.log('rc', rc)
+        _Api.delete("deleteProyek?id="+rc.id).then(res=>{
+            console.log('res', res)
+            if(res.data.sts == 1){
+                _Toastr.success('Berhasil')
+                loadData()
+            }
+        })
+    }
 
 
     const columns = [
         {
             title: '',
-            width: "50px",
-            sorter: true,
+            width: "100px",
+            align: 'center',
             render: (record, i, j) =>
-                <div style={{ textAlign: "center" }}>
+                <div style={{ textAlign: "center", display: "flex" }}>
                     <Popover placement="bottom" content={<div> Edit </div>}>
                         <Button type="primary" shape="shape" icon={<EditOutlined />} onClick={() => editData(record)} />
                     </Popover>
+                    &nbsp;
+                    <Popconfirm
+                        title="Anda yakin akan menghapus berkas proyek ini ? ( hati-hati ) ."
+                        // description=" Anda yakin akan menhapus berkay proyek ini ?"
+                        onConfirm={() => hapusBerkas(record)}
+                        // onCancel={cancel}
+                        okText="Ya, Hapus"
+                        cancelText="Tidak"
+                    >
+                        <Button type="primary" danger shape="shape" icon={<DeleteColumnOutlined />} />
+                    </Popconfirm>
+
                 </div>
 
         },
@@ -74,11 +98,18 @@ function ShowDataPengadaan() {
         // },
 
         {
-            title: 'Metode Pengadaan',
+            title: 'Cara Pengerjaan',
+            sorter: true,
+            width: "150px",
+            render: (_, rc) =>
+                <div> <Tag size="large" color={rc.jenis == "Tender" ? "green" : rc.jenis == "eCatalog" ? "orange" : "blue"}>  <b>  {rc.jenis} </b> </Tag> </div>
+        },
+        {
+            title: 'Sumber Dana',
             sorter: true,
             width: "140px",
             render: (_, rc) =>
-                <div> <Tag color={rc.jenis == "Tender" ? "green" : "blue"}>  <b>  {rc.jenis} </b> </Tag> </div>
+                <div> <div color={rc.jenis == "apbd" ? "green" : "blue"}>  <b>  {rc.sumberdana}   </b> </div> </div>
         },
         {
             title: 'Jenis Pekerjaan',
@@ -86,13 +117,13 @@ function ShowDataPengadaan() {
             width: "300px",
             render: (_, rc) =>
                 <div>
-                    <b> {rc.jenispekerjaan} </b>
+                    <b> {rc.jenispekerjaan} <br /> <Tag style={{ textTransform: "uppercase" }}> {rc.carapembelian} </Tag> </b>
                 </div>
         },
         {
             title: 'Nama Pekerjaan',
             sorter: true,
-            width: "400px",
+            width: "300px",
 
             render: (_, rc) =>
                 <div>
@@ -101,7 +132,7 @@ function ShowDataPengadaan() {
         },
         {
             title: 'Nama PPK',
-            width: "300px",
+            width: "200px",
             sorter: true,
             render: (_, rc) =>
                 <div>
@@ -112,31 +143,31 @@ function ShowDataPengadaan() {
         {
             title: 'Tahun Anggaran',
             sorter: true,
-            width: "100px",
+            width: "120px",
             render: (rc, i, j) =>
                 <div>
                     {rc.tahunanggaran}
                 </div>
         },
-        {
-            title: 'Harga Perkiraan Sendiri (HPS)',
-            sorter: true,
-            width: "200px",
-            render: (rc, i, j) =>
-                <div style={{ float: "right" }}>
-                    {rc.hps && formatNumber(parseInt(rc.hps))}
+        // {
+        //     title: 'Harga Perkiraan Sendiri (HPS)',
+        //     sorter: true,
+        //     width: "200px",
+        //     render: (rc, i, j) =>
+        //         <div style={{ float: "right" }}>
+        //             {rc.hps && formatNumber(parseInt(rc.hps))}
 
-                    {/* {formatNumber(rc.hps && parseInt(rc.hps))} */}
-                </div>
-        },
+        //             {/* {formatNumber(rc.hps && parseInt(rc.hps))} */}
+        //         </div>
+        // },
         {
             title: 'Nilai Kontrak',
             sorter: true,
-            width: "200px",
+            width: "130px",
             render: (rc, i, j) =>
-                <div style={{ float: "right" }}>
+                <div style={{ float: "right", fontWeight: 'bold' }}>
                     {/* { rc.nilaikontrak } */}
-                    {rc.nilaikontrak && formatNumber(parseInt(rc.nilaikontrak))}
+                    Rp. {rc.nilaikontrak && formatNumber(parseInt(rc.nilaikontrak))}
 
                 </div>
         },
@@ -195,6 +226,16 @@ function ShowDataPengadaan() {
                     val="id" name="jenispekerjaan"
                     caption="jenispekerjaan" label="Jenis Pekerjaan" />
                 <_Input label="Tahun Anggaran (TA)" name="tahunanggaran" />
+                {/* <Col sm={12}>
+                    <label> Sumber Dana : &nbsp; </label> */}
+                    <Form.Item name="sumberdana" label="Sumber Dana">
+                        <Radio.Group>
+                            <Radio value={"apbd"}>APBD</Radio>
+                            <Radio value={"blud"}>BLUD</Radio>
+                            <Radio value="">Semua</Radio>
+                        </Radio.Group>
+                    </Form.Item>
+                {/* </Col> */}
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
                 <_Row>
                     <_Col sm={5} />

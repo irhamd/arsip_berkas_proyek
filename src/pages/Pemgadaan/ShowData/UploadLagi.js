@@ -141,7 +141,12 @@ function UploadLagi(pr) {
                         <_Row>
 
                             <_Col sm={8} />
-                            <_Button label="Tutup" sm={4} block btnSave onClick={pr.onclose} />
+                            <_Button label="Tutup" sm={4} block btnSave onClick={() => {
+                                pr.loadDataHead()
+                                // pr.onclose
+                            }
+                            }
+                            />
                         </_Row>
 
                     </Form>
