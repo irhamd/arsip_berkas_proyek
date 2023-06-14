@@ -27,8 +27,8 @@ function _MainLayouts({ children }) {
     <Layout className="layout" style={{ background: "#ffe7db" }}>
       <div className="body">
         <div style={{ marginLeft: "160px" }}>
-          <h2 style={stile.title}> <span style={{ color: "#9a3813" }}>
-            ARSIP ONLINE </span> BERKAS PROYEK  </h2>
+          <h2 style={stile.title}> <span >
+            ARSIP ONLINE </span> BERKAS PROYEK  <span style={{ color :'#9a3813' }}> RSUD KOTA MATARAM </span> </h2>
           <_Nav />
         </div>
       </div>

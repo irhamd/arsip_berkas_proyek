@@ -11,9 +11,10 @@ import ExpandShowDataPengadaan from './Expand_ShowDataPengadaan';
 import moment from 'moment';
 import { useHistory } from 'react-router';
 import EditPekerjaan from './EditPekerjaan';
-import { formatNumber } from '../../../services/Text/GlobalText';
+import { formatNumber, globalText } from '../../../services/Text/GlobalText';
 import { Col } from 'react-bootstrap';
 import { _Toastr } from '../../../services/Toastr/Notify/_Toastr';
+import { ubahText } from '../../../services/Crypto';
 
 
 function ShowDataPengadaan() {
@@ -98,7 +99,7 @@ function ShowDataPengadaan() {
         // },
 
         {
-            title: 'Cara Pengerjaan',
+            title: 'Metode Pemilihan Penyedia',
             sorter: true,
             width: "150px",
             render: (_, rc) =>
@@ -210,6 +211,8 @@ function ShowDataPengadaan() {
     }
 
     useEffect(() => {
+        var role = ubahText(sessionStorage.getItem('x-auth-user'))
+        console.log('role', role)
         loadData()
         loadCombo()
     }, [])

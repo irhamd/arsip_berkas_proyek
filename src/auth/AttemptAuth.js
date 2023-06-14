@@ -47,12 +47,12 @@ function AttemptAuth() {
 
             axios.post(`${baseURL_R}loginRev`, obj).then(res => {
                 const data = res.data;
-                console.log(res.data)
+                console.log(" role", res.data.user.role)
 
                 if (data) {
                     let user = JSON.stringify(res.data);
                     sessionStorage.setItem(globalText.x_auth_resu, acakText(user))
-                    sessionStorage.setItem(globalText.x_auth_user, acakText("!@#$%^&*()_+"))
+                    sessionStorage.setItem(globalText.x_auth_user, acakText(res.data.user.role))
                     sessionStorage.setItem(globalText.x_auth_access_token, acakText(data.token))
                     sessionStorage.setItem(globalText.x_auth_refresh_token, acakText(data.refresh_token))
                     sessionStorage.setItem(globalText.authorization, acakText(data.role))

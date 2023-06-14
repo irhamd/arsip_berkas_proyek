@@ -14,7 +14,7 @@ import { globalText } from '../services/Text/GlobalText';
 function Routing() {
     const c404 = () => {
         return (
-            <Redirect to={{ pathname: '/home' }} />
+            <Redirect to={{ pathname: '/ShowDataPengadaan' }} />
         )
     }
 

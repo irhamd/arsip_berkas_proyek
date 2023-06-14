@@ -35,7 +35,7 @@ function _Nav() {
       <Menu.Item key="33" icon={<SisternodeOutlined />}>
         <Link to="ShowDataPengadaan" > Data Arsip </Link>
       </Menu.Item>
-      <Menu.Item key="33" icon={<UsergroupAddOutlined />}>
+      <Menu.Item key="44" icon={<UsergroupAddOutlined />}>
         <Link to="ManajemenUser" > Manajemen User </Link>
       </Menu.Item>
       <SubMenu style={stile.menu} key="sub7"

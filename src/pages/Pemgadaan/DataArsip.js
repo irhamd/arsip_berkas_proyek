@@ -33,6 +33,8 @@ function DataArsip() {
     const [isiForm, setisiForm] = useState({})
     const [arr, setarr] = useState([])
     const [random, setrandom] = useState("")
+    const [jenisTender, setjenisTender] = useState([])
+    const [sumberDana, setsumberDana] = useState([])
 
     const history = useHistory();
 
@@ -64,6 +66,14 @@ function DataArsip() {
         })
         _Api.post("getMasterData", { "masterData": "pegawai_m" }).then(res => {
             setppk(res.data)
+
+        })
+        _Api.post("getMasterData", { "masterData": "metodepemilihan_m" }).then(res => {
+            setjenisTender(res.data)
+
+        })
+        _Api.post("getMasterData", { "masterData": "sumberdana_m" }).then(res => {
+            setsumberDana(res.data)
 
         })
     }
@@ -158,16 +168,16 @@ function DataArsip() {
         setsteps(steps - 1)
     }
 
-    const jenisTender = [
-        { val: "Tender", caption: "Tender" },
-        { val: "Non Tender", caption: "Non Tender" },
-        { val: "eCatalog", caption: "E-Catalog" },
-    ]
+    // const jenisTender = [
+    //     { val: "Tender", caption: "Tender" },
+    //     { val: "Non Tender", caption: "Non Tender" },
+    //     { val: "eCatalog", caption: "E-Catalog" },
+    // ]
 
-    const sumberDana = [
-        { val: "APBD", caption: "APBD" },
-        { val: "BLUD", caption: "BLUD" },
-    ]
+    // const sumberDana = [
+    //     { val: "APBD", caption: "APBD" },
+    //     { val: "BLUD", caption: "BLUD" },
+    // ]
 
     const changejenisPekerjaan = (e, f) => {
         change("jenispekerjaan", e)
@@ -199,13 +209,13 @@ function DataArsip() {
                 <TabPane key="1">
                     <Row>
                         <_Select size="large" option={sumberDana}
-                            val="val"
+                            val="sumberdana"
                             onSelect={e => change("sumberdana", e)}
-                            caption="caption" label="Sumber Dana" sm={6} />
+                            caption="sumberdana" label="Sumber Dana" sm={6} />
                         <_Select size="large" option={jenisTender}
-                            val="val" sm={6}
+                            val="metode" sm={6}
                             onSelect={e => change("jenis", e)}
-                            caption="caption" label="Cara Pengerjaan" />
+                            caption="metode" label="Metode Pemilihan Penyedia :" />
                     </Row>
 
                 </TabPane>
@@ -215,13 +225,13 @@ function DataArsip() {
                             val="id"
                             onChange={changejenisPekerjaan}
                             caption="jenispekerjaan" label="Jenis Pekerjaan" />
-                        <Col sm={4}>
+                        {/* <Col sm={4}>
                             <label> Cara Pembelian  : &nbsp; </label>
                             <Radio.Group onChange={e=>change('carapembelian', e.target.value) }>
                                 <Radio value={"langsung"}>Langsung</Radio>
                                 <Radio value={"tidak langsung"}>Tidak Langsung</Radio>
                             </Radio.Group>
-                        </Col>
+                        </Col> */}
                     </Row>
                 </TabPane>
                 <TabPane key="3">
