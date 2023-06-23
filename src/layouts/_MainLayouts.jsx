@@ -44,7 +44,7 @@ function _MainLayouts({ children }) {
 
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>simrs©rsudkotamataram 2021 Created by <b> @FHD </b></Footer>
+      <Footer style={{ textAlign: 'center' }}>simrs©rsudkotamataram 2021 version 2.3 Created by <b> @FHD </b></Footer>
     </Layout>
   );
 }

@@ -26,7 +26,7 @@ export const _Input = (r) => {
     return (
         <ColB sm={r.sm ? r.sm : 12} >
             <Form.Item name={r.name} label={r.label} style={{ ...r.style, marginBottom: r.mb ? r.mb : "10px" }}
-                name={r.name} hidden={r.hidden}
+                hidden={r.hidden}
                 fieldKey={r.fieldKey} shouldUpdate
                 restField={r.restField}
                 rules={[{ required: r.required, message: r.message ? r.message : errMessage, type: r.type ? r.type : '' }]}
@@ -42,10 +42,9 @@ export const _Input = (r) => {
 
                     /> :
                     r.multiline ?
-                        <TextArea showCount disabled={r.disabled} maxLength={r.maxLength}
+                        <TextArea showCount maxLength={r.maxLength}
                             onChange={r.onChange}
                             // name={r.name}
-                            disabled={r.disabled}
                             value={r.value}
                             allowClear
                             rows={r.rows} size={r.size}
@@ -306,6 +305,7 @@ export const _Select = (r) => {
                 <Select onChange={r.onChange} showSearch allowClear name={r.name} disabled={r.disabled}
                     optionFilterProp="children"
                     onSelect={r.onSelect}
+                    defaultValue={r.defaultValue}
                 >
                     {render}
                 </Select>

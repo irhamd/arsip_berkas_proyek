@@ -22,6 +22,7 @@ function UploadLagi(pr) {
 
     const loadCombo = (val) => {
         formData.setFieldsValue(recordData)
+        debugger
        
         var bd = recordData.bidang_id ? recordData.bidang_id : null 
         _Api.get("getRegisterArsipPenunjang?bidang_id=" + bd).then(res => {

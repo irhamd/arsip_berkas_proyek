@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import _MainLayouts from '../../../layouts/_MainLayouts'
 import _Api from '../../../services/Api/_Api'
-import { _Button, _Checkbox, _Input, _Select } from '../../../services/Forms/Forms'
+import { _Button, _Checkbox, _Input, _Select, _Date } from '../../../services/Forms/Forms'
 
-import { Table, Form, Popover, Button, Tag, Popconfirm, Radio } from 'antd';
+import { Table, Form, Popover, Button, Tag, Popconfirm, Radio, DatePicker } from 'antd';
 import { RandomText } from '../../../services/Text/RandomText';
 import { DeleteColumnOutlined, DownSquareOutlined, DropboxOutlined, EditOutlined, FileSearchOutlined, MinusSquareOutlined, PlusSquareOutlined, RightSquareOutlined } from '@ant-design/icons';
 import { _Col, _Row } from '../../../services/Forms/LayoutBootstrap';
@@ -12,9 +12,10 @@ import moment from 'moment';
 import { useHistory } from 'react-router';
 import EditPekerjaan from './EditPekerjaan';
 import { formatNumber, globalText } from '../../../services/Text/GlobalText';
-import { Col } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { _Toastr } from '../../../services/Toastr/Notify/_Toastr';
 import { ubahText } from '../../../services/Crypto';
+import dayjs from 'dayjs';
 
 
 function ShowDataPengadaan() {
@@ -40,9 +41,9 @@ function ShowDataPengadaan() {
     }
     const hapusBerkas = (rc) => {
         console.log('rc', rc)
-        _Api.delete("deleteProyek?id="+rc.id).then(res=>{
+        _Api.delete("deleteProyek?id=" + rc.id).then(res => {
             console.log('res', res)
-            if(res.data.sts == 1){
+            if (res.data.sts == 1) {
                 _Toastr.success('Berhasil')
                 loadData()
             }
@@ -83,7 +84,15 @@ function ShowDataPengadaan() {
                 <div style={{ textAlign: "center" }}>
                     {j + 1}
                 </div>
-
+        },
+        {
+            title: 'Tanggal Input',
+            width: "130px",
+            sorter: true,
+            render: (record, i, j) =>
+                <div style={{ textAlign: "center" }}>
+                    {record.tanggal && moment(record.tanggal).format('DD-MM-YYYY')}
+                </div>
         },
 
 
@@ -128,7 +137,9 @@ function ShowDataPengadaan() {
 
             render: (_, rc) =>
                 <div>
-                    <b> {rc.namapekerjaan} </b>
+                    <b> {rc.namapekerjaan} </b> <br />
+                    <Tag color="orange"> {rc.jenisarsip} </Tag>
+
                 </div>
         },
         {
@@ -192,8 +203,17 @@ function ShowDataPengadaan() {
     const loadData = (val) => {
         setlistPekerjaan([])
         setedit(false)
+        if (val) {
+            var param = {
+                ...val,
+                tglawal: moment(val.tglawal).format('YYYY-MM-DD'),
+                tglakhir: moment(val.tglakhir).format('YYYY-MM-DD')
+            }
+        } else {
+            var param = val
+        }
         setloading(true)
-        _Api.get("arsip-showBerkasArsip", { params: val }).then(res => {
+        _Api.get("arsip-showBerkasArsip", { params: param }).then(res => {
             setlistPekerjaan(res.data.data)
             setloading(false)
         })
@@ -223,7 +243,8 @@ function ShowDataPengadaan() {
             <br />
             <Form labelCol={{ span: "8" }} wrapperCol={{ span: "10" }} onFinish={loadData}>
                 {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
-
+                <_Date label="Tanggal" name="tglawal" />
+                <_Date label="Sampai" name="tglakhir" />
                 <_Input label="Nama Pekerjaan" name="namappekerjaan" />
                 <_Select size="large" option={jenisPekerjaan}
                     val="id" name="jenispekerjaan"
@@ -231,13 +252,13 @@ function ShowDataPengadaan() {
                 <_Input label="Tahun Anggaran (TA)" name="tahunanggaran" />
                 {/* <Col sm={12}>
                     <label> Sumber Dana : &nbsp; </label> */}
-                    <Form.Item name="sumberdana" label="Sumber Dana">
-                        <Radio.Group>
-                            <Radio value={"apbd"}>APBD</Radio>
-                            <Radio value={"blud"}>BLUD</Radio>
-                            <Radio value="">Semua</Radio>
-                        </Radio.Group>
-                    </Form.Item>
+                <Form.Item name="sumberdana" label="Sumber Dana">
+                    <Radio.Group>
+                        <Radio value={"apbd"}>APBD</Radio>
+                        <Radio value={"blud"}>BLUD</Radio>
+                        <Radio value="">Semua</Radio>
+                    </Radio.Group>
+                </Form.Item>
                 {/* </Col> */}
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
                 <_Row>

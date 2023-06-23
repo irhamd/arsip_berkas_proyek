@@ -30,7 +30,7 @@ function DataArsip() {
     const [registerpengadaan, setregisterpengadaan] = useState([])
     const [ppk, setppk] = useState([])
     const [jenispk, setjenispk] = useState("")
-    const [isiForm, setisiForm] = useState({bidang_id : 2})
+    const [isiForm, setisiForm] = useState({})
     const [arr, setarr] = useState([])
     const [random, setrandom] = useState("")
     const [jenisTender, setjenisTender] = useState([])
@@ -144,6 +144,12 @@ function DataArsip() {
 
 
     const simpanArsip = () => {
+        console.log('isiForm', isiForm)
+        if(isiForm.id_jenisarsip == undefined || isiForm.id_jenisarsip == null  ){
+            _Toastr.error("Arsip bidang, wajib di isi .!")
+            return
+
+        }
         _Api.post("simpanDataBerkas", isiForm).then(res => {
             // console.log(`res.data`, res.data)
             if (res.data.sts == "1") {
@@ -162,6 +168,7 @@ function DataArsip() {
     useEffect(() => {
         loadData()
         setrandom(randomstring.generate(10) + moment().format('YYYYMMDDHHmmss'))
+        // change("bidang_id", "2") // 2 = bidang ID lainnya
         // cekRefresh()
     }, [])
 
@@ -214,6 +221,7 @@ function DataArsip() {
             setbidang_id(bdg)
 
             change("bidang_id", bdg)
+            change("id_jenisarsip", e)
 
             getRegisterByBidang(bdg) 
             // bdg ? getRegisterDefaul()
@@ -284,7 +292,7 @@ function DataArsip() {
                         <_Select size="large" option={jenisArsip}
                             val="id"
                             onChange={changeBidangPenunjang}
-                            caption="jenisarsip" label="Arsip Bidan Penunjang (Khusus Penunjang)" />
+                            caption="jenisarsip" label="Arsip Bidan Penunjang (Khusus Penunjang)"  />
                         {/* <_Select label="" onSelect={e => change("hps", e)} option={ppk} val="id" caption="namapegawai" required /> */}
                     </Form>
                     {/* register pengadaan */}

@@ -16,8 +16,8 @@ function EditPekerjaan(pr) {
     const { recordData } = pr
     const [formData] = Form.useForm()
 
-    const loadCombo = (val) => {
-        setloading(true)
+    const loadCombo = (val) =>  {
+        // setloading(true)
         formData.setFieldsValue({
             ...recordData,
             jenispekerjaan: recordData.id_jenispekerjaan,
@@ -28,7 +28,7 @@ function EditPekerjaan(pr) {
 
         _Api.post("getMasterData", { "masterData": "arsip_jenispekerjaan_m" }).then(res => {
             setjenisPekerjaan(res.data)
-            setloading(false)
+            // setloading(false)
         })
 
         _Api.post("getMasterData", { "masterData": "metodepemilihan_m" }).then(res => {
@@ -45,6 +45,7 @@ function EditPekerjaan(pr) {
     const simpanData = (val) => {
         var obj = {
             id: recordData.id,
+            id_jenisarsip :recordData.id_jenisarsip, 
             ...val,
         }
 
@@ -82,7 +83,7 @@ function EditPekerjaan(pr) {
                 visible={pr.show}
                 title="Edit Pekerjaan"
                 // onOk={this.handleOk}
-                // onCancel={this.handleCancel}
+                onCancel={pr.close}
                 footer={[]} >
                 <Spin spinning={false}>
 
