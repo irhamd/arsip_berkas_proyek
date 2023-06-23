@@ -83,7 +83,7 @@ export const _Number = (r) => {
                     onChange={r.onChange}
                     value={r.value}
                     disabled={r.disabled} size={r.size}
-                    formatter={value => r.format && !r.number && `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
+                    formatter={value => r.format && !r.number ? `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',') : value}
                     parser={value => r.format && !r.number ? value.replace(/\$\s?|(,*)/g, '') : value}
 
                     style={{ ...r.style, width: "100%" }}

@@ -22,10 +22,10 @@ function UploadLagi(pr) {
 
     const loadCombo = (val) => {
         formData.setFieldsValue(recordData)
-
-        _Api.post("getMasterData", { "masterData": "arsip_registerpengadaan_m" }).then(res => {
+       
+        var bd = recordData.bidang_id ? recordData.bidang_id : null 
+        _Api.get("getRegisterArsipPenunjang?bidang_id=" + bd).then(res => {
             setregisterPengadaan(res.data)
-
         })
     }
 
@@ -117,8 +117,11 @@ function UploadLagi(pr) {
 
 
                         <_Select size="large" option={registerPengadaan}
-                            onChange={() => setDefaultFileList(null)}
-                            val="id" name="registerpengadaan" onChange={e => setIdRegister(e)}
+                            onChange={(e) => {
+                                setIdRegister(e)
+                                setDefaultFileList(null)
+                            }}
+                            val="id" name="registerpengadaan"  // onChange={e => setIdRegister(e)}
                             caption="registerpengadaan" label="Register Pengadaan" />
 
                         <Divider orientation="left">Upload File</Divider>

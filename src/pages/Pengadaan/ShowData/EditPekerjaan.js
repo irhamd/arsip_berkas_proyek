@@ -11,6 +11,7 @@ function EditPekerjaan(pr) {
     const [loading, setloading] = useState(false)
     const [ppk, setppk] = useState([])
     const [jenisPekerjaan, setjenisPekerjaan] = useState([])
+    const [jenisTender, setjenisTender] = useState([])
 
     const { recordData } = pr
     const [formData] = Form.useForm()
@@ -28,7 +29,10 @@ function EditPekerjaan(pr) {
         _Api.post("getMasterData", { "masterData": "arsip_jenispekerjaan_m" }).then(res => {
             setjenisPekerjaan(res.data)
             setloading(false)
+        })
 
+        _Api.post("getMasterData", { "masterData": "metodepemilihan_m" }).then(res => {
+            setjenisTender(res.data)
         })
     }
 
@@ -86,23 +90,25 @@ function EditPekerjaan(pr) {
                         {/* <_Input label="Nama Pekerjaan" onChange={e => console.log(e.target.value)} /> */}
                         <_Select label="Sumber Dana" name="sumberdana" option={sumberDana} val="val" caption="caption" required />
                         <_Input label="Nama Pekerjaan" name="namapekerjaan" required />
-                        <_Number format label="Tahun Anggaran (TA)" name="tahunanggaran" required />
+                        <_Number label="Tahun Anggaran (TA)" name="tahunanggaran" required />
                         <_Select label="PPK" name="id_ppk" option={ppk} val="id" caption="namapegawai" required />
                         <_Select label="Jenis Pekerjaan" name="jenispekerjaan" option={jenisPekerjaan} val="id" caption="jenispekerjaan" required />
-                        <Col sm={12}>
-                            <label> Cara Pembelian : &nbsp; </label>
-                            <Form.Item name="carapembelian">
-                                <Radio.Group>
-                                    <Radio value={"langsung"}>Langsung</Radio>
-                                    <Radio value={"tidak langsung"}>Tidak Langsung</Radio>
-                                </Radio.Group>
-                            </Form.Item>
-                        </Col>
-                        {/* <_Select  option={jenisPekerjaan} required
-                            val="id" name="jenispekerjaan"
-                        caption="jenispekerjaan" label="Jenis Pekerjaan" /> */}
+                        {/* 
+                            <Col sm={12}>
+                                <label> Cara Pembelian : &nbsp; </label>
+                                <Form.Item name="carapembelian">
+                                    <Radio.Group>
+                                        <Radio value={"langsung"}>Langsung</Radio>
+                                        <Radio value={"tidak langsung"}>Tidak Langsung</Radio>
+                                    </Radio.Group>
+                                </Form.Item>
+                            </Col>  
+                            <_Select  option={jenisPekerjaan} required
+                                val="id" name="jenispekerjaan"
+                            caption="jenispekerjaan" label="Jenis Pekerjaan" /> 
+                        */}
 
-                        <Form.Item label="Jenis" name="jenis"
+                        {/* <Form.Item label="Jenis" name="jenis"
                             rules={[
                                 {
                                     required: true,
@@ -114,7 +120,12 @@ function EditPekerjaan(pr) {
                                 <Radio value={"Tender"}>Tender</Radio>
                                 <Radio value={"eCatalog"}>E-Catalog</Radio>
                             </Radio.Group>
-                        </Form.Item>
+                        </Form.Item> */}
+
+                        <_Select size="large" option={jenisTender}
+                            val="metode"  name="jenis"
+                            caption="metode" label="Metode Pemilihan Penyedia :" />
+
                         <_Number format label="Nilai Kontrak" name="nilaikontrak" required />
                         {/* <_Number format label="HPS" name="hps" required /> */}
                         <hr />

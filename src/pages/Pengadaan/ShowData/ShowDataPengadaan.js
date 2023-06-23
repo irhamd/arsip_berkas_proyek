@@ -118,7 +118,7 @@ function ShowDataPengadaan() {
             width: "300px",
             render: (_, rc) =>
                 <div>
-                    <b> {rc.jenispekerjaan} <br /> <Tag style={{ textTransform: "uppercase" }}> {rc.carapembelian} </Tag> </b>
+                    <b> {rc.jenispekerjaan} <br /> <Tag color="yellow" style={{ textTransform: "uppercase" }}> {rc.bidang} </Tag> </b>
                 </div>
         },
         {

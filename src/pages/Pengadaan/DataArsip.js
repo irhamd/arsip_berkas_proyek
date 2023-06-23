@@ -30,11 +30,14 @@ function DataArsip() {
     const [registerpengadaan, setregisterpengadaan] = useState([])
     const [ppk, setppk] = useState([])
     const [jenispk, setjenispk] = useState("")
-    const [isiForm, setisiForm] = useState({})
+    const [isiForm, setisiForm] = useState({bidang_id : 2})
     const [arr, setarr] = useState([])
     const [random, setrandom] = useState("")
     const [jenisTender, setjenisTender] = useState([])
     const [sumberDana, setsumberDana] = useState([])
+    const [jenisArsip, setjenisArsip] = useState([])
+    const [loading, setloading] = useState(false)
+    const [bidang_id, setbidang_id] = useState()
 
     const history = useHistory();
 
@@ -60,9 +63,12 @@ function DataArsip() {
         _Api.post("getMasterData", { "masterData": "arsip_jenispekerjaan_m" }).then(res => {
             setjenisPekerjaan(res.data)
         })
-        _Api.post("getMasterData", { "masterData": "arsip_registerpengadaan_m" }).then(res => {
+        _Api.post("getMasterData", { "masterData": "jenisarsip_m" }).then(res => {
+            setjenisArsip(res.data)
+        })
+        _Api.get("getRegisterArsipPenunjang?bidang_id=2").then(res => {
             setregisterpengadaan(res.data)
-
+            setloading(false)
         })
         _Api.post("getMasterData", { "masterData": "pegawai_m" }).then(res => {
             setppk(res.data)
@@ -164,6 +170,18 @@ function DataArsip() {
     const lanjut = () => {
         setsteps(steps + 1)
     }
+    const getRegisterByBidang = (bidang_id) => {
+        _Api.get("getRegisterArsipPenunjang?bidang_id=" + bidang_id).then(res => {
+            setregisterpengadaan(res.data)
+            setloading(false)
+        })
+    }
+    // const getRegisterDefaul = () => {
+    //     _Api.get("getRegisterArsipPenunjang?bidang_id=2").then(res => {
+    //         setregisterpengadaan(res.data)
+    //         setloading(false)
+    //     })
+    // }
     const mundur = () => {
         setsteps(steps - 1)
     }
@@ -182,6 +200,31 @@ function DataArsip() {
     const changejenisPekerjaan = (e, f) => {
         change("jenispekerjaan", e)
         setjenispk(f.children[1])
+    }
+
+    const changeBidangPenunjang = (e) => {
+
+        setloading(true)
+        if (e) {
+            let newArray = jenisArsip.filter(function (el) {
+                return el.id == e;
+            }
+            );
+            var bdg = newArray[0].bidang_id;
+            setbidang_id(bdg)
+
+            change("bidang_id", bdg)
+
+            getRegisterByBidang(bdg) 
+            // bdg ? getRegisterDefaul()
+
+        } else {
+            getRegisterByBidang(2)
+        }
+
+        // getRegisterArsipPenunjang
+        // change("jenispekerjaan", e)
+        // setjenispk(f.children[1])
     }
 
 
@@ -221,17 +264,13 @@ function DataArsip() {
                 </TabPane>
                 <TabPane key="2">
                     <Row>
-                        <_Select sm={5} size="large" option={jenisPekerjaan}
+                        <_Select sm={6} size="large" option={jenisPekerjaan}
                             val="id"
                             onChange={changejenisPekerjaan}
                             caption="jenispekerjaan" label="Jenis Pekerjaan" />
-                        {/* <Col sm={4}>
-                            <label> Cara Pembelian  : &nbsp; </label>
-                            <Radio.Group onChange={e=>change('carapembelian', e.target.value) }>
-                                <Radio value={"langsung"}>Langsung</Radio>
-                                <Radio value={"tidak langsung"}>Tidak Langsung</Radio>
-                            </Radio.Group>
-                        </Col> */}
+
+
+
                     </Row>
                 </TabPane>
                 <TabPane key="3">
@@ -242,10 +281,14 @@ function DataArsip() {
                         <_Select label="PPK" onSelect={e => change("id_ppk", e)} option={ppk} val="id" caption="namapegawai" required />
                         {/* <_Number label="HPS (Harga Perkiraan Sendiri)" onChange={e => change("hps", e)} format required /> */}
                         <_Number label="Nilai Kontrak" onChange={e => change("nilaikontrak", e)} format required />
+                        <_Select size="large" option={jenisArsip}
+                            val="id"
+                            onChange={changeBidangPenunjang}
+                            caption="jenisarsip" label="Arsip Bidan Penunjang (Khusus Penunjang)" />
                         {/* <_Select label="" onSelect={e => change("hps", e)} option={ppk} val="id" caption="namapegawai" required /> */}
                     </Form>
                     {/* register pengadaan */}
-                    <Table size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }}
+                    <Table loading={loading} size="large" scroll={{ y: 700 }} pagination={{ pageSize: 30 }}
                         columns={columns}
                         dataSource={registerpengadaan} />
                 </TabPane>

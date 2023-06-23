@@ -4,8 +4,8 @@ import AttemptAuth from '../auth/AttemptAuth';
 // import _Login from '../auth/_Login';
 import _MainLayouts from '../layouts/_MainLayouts';
 
-import DataArsip from '../pages/Pemgadaan/DataArsip';
-import ShowDataPengadaan from '../pages/Pemgadaan/ShowData/ShowDataPengadaan';
+import DataArsip from '../pages/Pengadaan/DataArsip';
+import ShowDataPengadaan from '../pages/Pengadaan/ShowData/ShowDataPengadaan';
 import { Cache } from '../services/Cache';
 import ProtectedRoute from '../services/Route/ProtectedRoute';
 import { globalText } from '../services/Text/GlobalText';
