@@ -28,6 +28,7 @@ function ShowDataPengadaan() {
     const [jenispk, setjenispk] = useState("")
     const [edit, setedit] = useState(false)
     const [recordData, setrecordData] = useState([])
+    const [jenisArsip, setjenisArsip] = useState([])
 
 
     var histori = useHistory()
@@ -206,8 +207,8 @@ function ShowDataPengadaan() {
         if (val) {
             var param = {
                 ...val,
-                tglawal: moment(val.tglawal).format('YYYY-MM-DD'),
-                tglakhir: moment(val.tglakhir).format('YYYY-MM-DD')
+                tglawal: val.tglawal ? moment(val.tglawal).format('YYYY-MM-DD') : "",
+                tglakhir: val.tglakhir ? moment(val.tglakhir).format('YYYY-MM-DD') : ""
             }
         } else {
             var param = val
@@ -227,6 +228,9 @@ function ShowDataPengadaan() {
 
         _Api.post("getMasterData", { "masterData": "arsip_jenispekerjaan_m" }).then(res => {
             setjenisPekerjaan(res.data)
+        })
+        _Api.post("getMasterData", { "masterData": "jenisarsip_m" }).then(res => {
+            setjenisArsip(res.data)
         })
     }
 
@@ -260,6 +264,7 @@ function ShowDataPengadaan() {
                     </Radio.Group>
                 </Form.Item>
                 {/* </Col> */}
+                <_Select size="large" option={jenisArsip} val="id" name="jenisarsip" caption="jenisarsip" label="Arsip Bidan Penunjang" />
                 <_Select label="PPK" option={ppk} val="id" caption="namapegawai" name="id_ppk" />
                 <_Row>
                     <_Col sm={5} />
